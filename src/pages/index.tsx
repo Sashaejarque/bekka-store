@@ -1,11 +1,12 @@
 import { Grid, Typography } from '@mui/material';
 import React from 'react';
+import { Layout } from '../templates';
 
 const IndexPage = () => {
   return (
-    <Grid container justifyContent="center">
-      <Typography>Testing from index...</Typography>
-    </Grid>
+    <Layout>
+      <h1>buenos dias</h1>
+    </Layout>
   )
 };
 
