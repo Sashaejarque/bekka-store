@@ -8,6 +8,7 @@ interface Props {
 const CategoryCard: FC<Props> = ({
     categoryName,
 }) => {
+    const textFormatted =  `${categoryName[0].toUpperCase()}${categoryName.slice(1)}`;
     const handleRoute = (categoryName: String) => {
         if (categoryName === "men's clothing") {
             return '/categories/men-clothing';
@@ -28,7 +29,7 @@ const CategoryCard: FC<Props> = ({
             />
             <CardContent>
                 <Typography textAlign="center">
-                    {categoryName}
+                    {textFormatted}
                 </Typography>
             </CardContent>
             <CardActions>

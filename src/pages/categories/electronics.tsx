@@ -1,10 +1,11 @@
 import React from 'react';
+import { Layout } from '../../templates';
 
 const Electronic = () => {
     return (
-        <div>
-        <h1>Electronic Page</h1>
-        </div>
+        <Layout>
+            <h1>Electronic Page</h1>
+        </Layout>
     )
 };
 

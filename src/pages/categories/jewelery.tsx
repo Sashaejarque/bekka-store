@@ -1,10 +1,11 @@
 import React from 'react';
+import { Layout } from '../../templates';
 
 const JewelryPage = () => {
     return (
-        <div>
-        <h1>Jewelry Page</h1>
-        </div>
+        <Layout>
+            <h1>Jewelry Page</h1>
+        </Layout>
     )
 };
 
