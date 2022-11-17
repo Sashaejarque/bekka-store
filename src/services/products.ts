@@ -20,3 +20,8 @@ export const getElectronicsProducts = async () => {
     const response = await axios.get(`${API_URL}/products/category/electronics`);
     return response;
 };
+
+export const getAllProducts = async () => {
+    const response = await axios.get(`${API_URL}/products`);
+    return response;
+};
