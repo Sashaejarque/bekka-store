@@ -103,13 +103,13 @@ const IndexPage = () => {
                 <Grid
                   container
                   item
-                  lg={3}
                   md={4}
                   sm={6}
                   xs={12}
                   key={product.id}
                   justifyContent="center"
                   alignItems="center"
+                  mb={4}
                 >
                   <ProductCard
                     image={product.image}
