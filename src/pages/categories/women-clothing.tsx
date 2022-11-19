@@ -92,6 +92,7 @@ const WomenClothing = () => {
                   image={product.image}
                   title={product.title}
                   price={product.price}
+                  id={product.id}
                 />
               </Grid>
             ))

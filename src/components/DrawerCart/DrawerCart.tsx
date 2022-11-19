@@ -3,6 +3,8 @@ import Drawer from "@mui/material/Drawer";
 import { Divider, Grid, IconButton, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import useResponsiveScreen from "../../hooks/useResponsiveScreen";
+import CardCart from "../CardCart/CardCart";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 interface Props {
   open: boolean;
@@ -18,9 +20,12 @@ const styles = {
   },
 };
 const DrawerCart: FC<Props> = ({ open, onClose }) => {
+  const { cart } = useShoppingCart();
   const { width, height } = useResponsiveScreen();
-  const responsiveWidth = useMemo(() => width <= 800 ? width * 0.6 : width * 0.4, [width]);
-
+  const responsiveWidth = useMemo(
+    () => (width <= 800 ? width * 0.6 : width * 0.4),
+    [width]
+  );
   const responsiveHeight = useMemo(() => height, [height]);
 
   return (
@@ -52,6 +57,18 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
           <Grid container item xs={12} justifyContent="center">
             <Divider sx={styles.divider} />
           </Grid>
+        </Grid>
+        <Grid container item xs={12} justifyContent="center">
+          {cart.map((item) => (
+            <CardCart
+              key={item.id}
+              id={item.id}
+              image={item.image}
+              title={item.title}
+              price={item.price}
+              quantity={item.quantity}
+            />
+          ))}
         </Grid>
       </div>
     </Drawer>
