@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, useMemo } from "react";
 import useResponsiveScreen from "../../hooks/useResponsiveScreen";
 
 interface images {
@@ -48,7 +48,7 @@ const CategoryCard: FC<Props> = ({ categoryName }) => {
   };
 
   const { width } = useResponsiveScreen();
-  const responsiveWidth = width * 0.8;
+  const responsiveWidth = useMemo(() => width * 0.8, [width]);
 
   // the backend does not bring the images by category. That's why the hardcode
   const categoryImages: images = {
