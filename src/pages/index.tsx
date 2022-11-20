@@ -6,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import CategoryCard from "../components/CategoryCard/CategoryCard";
 import { getCategories } from "../services/categories";
 import { Layout } from "../templates";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -19,7 +18,7 @@ import CategoryCarousel from "../components/CategoryCarousel/CategoryCarousel";
 const IndexPage = () => {
   const [categoriesList, setCategoriesList] = useState([]);
   const [allProducts, setAllProducts] = useState<Products[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState("");
+  const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
   const categories = async () => {
@@ -33,6 +32,16 @@ const IndexPage = () => {
       console.log(error);
     }
   };
+
+  const filteredProducts = allProducts.filter((product) => {
+    if (filter === "") {
+      return product;
+    } else if (product.title.toLowerCase().includes(filter.toLowerCase())) {
+      return product;
+    }
+  });
+
+  console.log("sasha", filteredProducts);
 
   useEffect(() => {
     categories();
@@ -65,7 +74,7 @@ const IndexPage = () => {
           id="input-with-icon-textfield"
           sx={{ width: "90%", marginTop: 4 }}
           label="Search for products"
-          onChange={(e) => setFilteredProducts(e.target.value)}
+          onChange={(e) => setFilter(e.target.value)}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -82,38 +91,36 @@ const IndexPage = () => {
             <CircularProgress />
           </Grid>
         ) : (
-          allProducts
-            .filter((product) => {
-              if (filteredProducts === "") {
-                return product;
-              } else if (
-                product.title
-                  .toLowerCase()
-                  .includes(filteredProducts.toLowerCase())
-              ) {
-                return product;
-              }
-            })
-            .map((product) => (
-              <Grid
-                container
-                item
-                md={4}
-                sm={6}
-                xs={12}
-                key={product.id}
-                justifyContent="center"
-                alignItems="center"
-                mb={4}
-              >
-                <ProductCard
-                  image={product.image}
-                  title={product.title}
-                  price={product.price}
-                  id={product.id}
-                />
-              </Grid>
-            ))
+          filteredProducts.map((product) => (
+            <Grid
+              container
+              item
+              md={4}
+              sm={6}
+              xs={12}
+              key={product.id}
+              justifyContent="center"
+              alignItems="center"
+              mb={4}
+            >
+              <ProductCard
+                image={product.image}
+                title={product.title}
+                price={product.price}
+                id={product.id}
+              />
+            </Grid>
+          ))
+        )}
+        {filteredProducts.length === 0 && (
+          <Grid item xs={12}>
+            <Typography
+              textAlign="center"
+              sx={{ marginBottom: 10, fontSize: 20 }}
+            >
+              No products found, try with another name...
+            </Typography>
+          </Grid>
         )}
       </Grid>
     </Layout>
