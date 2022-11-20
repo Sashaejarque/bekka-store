@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { Divider, Grid, Typography } from "@mui/material";
+import { Badge, Divider, Grid, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React, { useMemo, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DrawerCart from "../DrawerCart/DrawerCart";
 import useResponsiveScreen from "../../hooks/useResponsiveScreen";
+import { useShoppingCart } from "../../context/ShoppingCartContext";
 
 const styles = {
   container: {
@@ -27,6 +28,7 @@ const styles = {
 };
 const Header = () => {
   const [drawer, setDrawer] = useState(false);
+  const { cart } = useShoppingCart();
   const { width } = useResponsiveScreen();
   const responsiveWidth = useMemo(() => width * 0.02, [width]);
 
@@ -36,6 +38,15 @@ const Header = () => {
   const goToHome = () => {
     window.location.href = "/";
   };
+  const widthForIcon = useMemo(() => {
+    if (width < 600) {
+      return 2;
+    }
+    return 6;
+  }, [width]);
+  const totalItemsCart = useMemo(() => {
+    return cart.reduce((acc, item) => acc + item.quantity, 0);
+  }, [cart]);
   return (
     <>
       <Grid
@@ -65,15 +76,17 @@ const Header = () => {
           xs={2}
           alignItems="center"
           justifyContent="flex-end"
-          paddingRight={1}
+          paddingRight={widthForIcon}
           mt={1}
         >
-          <IconButton
-            aria-label="add to shopping cart"
-            onClick={() => toggleDrawer()}
-          >
-            <ShoppingCartIcon color="primary" />
-          </IconButton>
+          <Badge badgeContent={totalItemsCart} color="error">
+            <IconButton
+              aria-label="add to shopping cart"
+              onClick={() => toggleDrawer()}
+            >
+              <ShoppingCartIcon color="primary" />
+            </IconButton>
+          </Badge>
         </Grid>
       </Grid>
       <DrawerCart open={drawer} onClose={toggleDrawer} />

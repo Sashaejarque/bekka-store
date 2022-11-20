@@ -41,8 +41,6 @@ const IndexPage = () => {
     }
   });
 
-  console.log("sasha", filteredProducts);
-
   useEffect(() => {
     categories();
   }, []);
@@ -112,7 +110,7 @@ const IndexPage = () => {
             </Grid>
           ))
         )}
-        {filteredProducts.length === 0 && (
+        {filteredProducts.length === 0 && !loading && (
           <Grid item xs={12}>
             <Typography
               textAlign="center"
