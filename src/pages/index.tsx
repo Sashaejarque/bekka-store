@@ -40,17 +40,17 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <Grid container item xs={12} justifyContent="center" mt={-4}>
+      <Grid container item xs={12} justifyContent="center" mt={6}>
         <Typography sx={{ fontWeight: 600, fontSize: 40 }}>
           All categories
         </Typography>
       </Grid>
       {loading ? (
-        <Grid container justifyContent="center" alignItems="center">
+        <Grid container justifyContent="center" alignItems="center" mt={4}>
           <CircularProgress />
         </Grid>
       ) : (
-        <Grid container item xs={12} justifyContent="center" mt={2}>
+        <Grid container item xs={12} justifyContent="center">
           <CategoryCarousel data={categoriesList} />
         </Grid>
       )}

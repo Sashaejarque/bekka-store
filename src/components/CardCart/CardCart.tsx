@@ -16,6 +16,13 @@ const style = {
     title: {
         fontSize: 12,
     },
+    icon: {
+      display: 'flex',
+      alignItems: 'center',
+      width: 18,
+      height: 17,
+      marginRigth: 1,
+    },
 };
 
 const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
@@ -33,7 +40,7 @@ const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
         <Grid
           container
           item
-          xs={7}
+          xs={6}
           justifyContent="center"
           alignItems="flex-start"
           flexDirection="column"
@@ -51,12 +58,13 @@ const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
           item
           xs={3}
           alignItems="center"
-          justifyContent="flex-end"
-          paddingRight={2}
+          justifyContent="center"
         >
           <Typography>${price}</Typography>
-          <IconButton onClick={() => removeFromCart(id)}>
-            <DeleteIcon />
+        </Grid>
+        <Grid container item xs={1} alignItems="center">
+        <IconButton onClick={() => removeFromCart(id)} sx={style.icon}>
+            <DeleteIcon sx={style.icon} />
           </IconButton>
         </Grid>
       </Card>

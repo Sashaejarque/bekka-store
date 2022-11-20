@@ -33,6 +33,7 @@ const MenClothing = () => {
         justifyContent="center"
         alignItems="center"
         mb={2}
+        mt={4}
       >
         <Grid
           container

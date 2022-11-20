@@ -23,10 +23,20 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
   const { cart } = useShoppingCart();
   const { width, height } = useResponsiveScreen();
   const responsiveWidth = useMemo(
-    () => (width <= 800 ? width * 0.6 : width * 0.4),
+    () => (width <= 800 ? width : width * 0.4),
     [width]
   );
   const responsiveHeight = useMemo(() => height, [height]);
+
+  const totalCart = useMemo(() => {
+    return cart.reduce((acc, item) => {
+      if (item.quantity != 0) {
+        return acc + item.price * item.quantity;
+      } else {
+        return acc + item.price;
+      }
+    }, 0);
+  }, [cart]);
 
   return (
     <Drawer
@@ -36,7 +46,15 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
       transitionDuration={500}
       className="MuiDrawer-paperAnchorRigth"
     >
-      <div style={{ minWidth: responsiveWidth, height: responsiveHeight }}>
+      <div
+        style={{
+          maxWidth: responsiveWidth,
+          minHeight: responsiveHeight,
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "column",
+        }}
+      >
         <Grid
           container
           justifyContent="flex-end"
@@ -57,19 +75,60 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
           <Grid container item xs={12} justifyContent="center">
             <Divider sx={styles.divider} />
           </Grid>
+          {cart.length === 0 && (
+            <Grid item xs={12} ml={2} mt={10}>
+              <Typography
+                textAlign="center"
+                sx={{ fontSize: 20, fontWeight: "bold" }}
+              >
+                Shopping cart is empty
+              </Typography>
+            </Grid>
+          )}
+          {cart.length !== 0 &&
+            cart.map((item) => (
+              <Grid
+                container
+                item
+                xs={12}
+                justifyContent="center"
+                key={item.id}
+              >
+                <CardCart
+                  id={item.id}
+                  image={item.image}
+                  title={item.title}
+                  price={item.price}
+                  quantity={item.quantity}
+                />
+              </Grid>
+            ))}
         </Grid>
-        <Grid container item xs={12} justifyContent="center">
-          {cart.map((item) => (
-            <CardCart
-              key={item.id}
-              id={item.id}
-              image={item.image}
-              title={item.title}
-              price={item.price}
-              quantity={item.quantity}
-            />
-          ))}
-        </Grid>
+        {cart.length > 0 && (
+          <>
+            <Grid container sx={{ height: 140 }}>
+              <Grid container item xs={12} justifyContent="center">
+                <Divider sx={[styles.divider, { marginBottom: 2 }]} />
+              </Grid>
+              <Grid
+                container
+                item
+                justifyContent="space-between"
+                alignItems="center"
+                mr={6}
+                ml={6}
+                mb={2}
+              >
+                <Typography variant="h5" sx={styles.title}>
+                  Total:
+                </Typography>
+                <Typography variant="h5">
+                  ${totalCart.toFixed(2)}
+                </Typography>
+              </Grid>
+            </Grid>
+          </>
+        )}
       </div>
     </Drawer>
   );
