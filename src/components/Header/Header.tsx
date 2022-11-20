@@ -17,6 +17,7 @@ const styles = {
     maxHeigth: 70,
     maxWidth: 200,
     filter: "brightness(0) invert(1)",
+    cursor: "pointer",
   },
   title: {
     color: "white",
@@ -31,6 +32,9 @@ const Header = () => {
 
   const toggleDrawer = () => {
     setDrawer(!drawer);
+  };
+  const goToHome = () => {
+    window.location.href = "/";
   };
   return (
     <>
@@ -52,6 +56,7 @@ const Header = () => {
             src="https://i0.wp.com/firstclose.com/wp-content/uploads/2022/03/cropped-firstclose-logo-header.png?fit=504%2C115&ssl=1"
             alt="FirstClose"
             style={styles.img}
+            onClick={() => goToHome()}
           />
         </Grid>
         <Grid
