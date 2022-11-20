@@ -5,6 +5,7 @@ import {
   useContext,
   useState,
 } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type ShoppingCartContextType = {
   getItemQuantity: (id: number) => number;
@@ -31,7 +32,7 @@ type CartItem = {
 const ShoppingCartContext = createContext({} as ShoppingCartContextType);
 
 export const ShoppingCartProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cart, setCart] = useLocalStorage<CartItem[]>('shopping-cart', []);
 
   function getItemQuantity(id: number) {
     return cart.find((item) => item.id === id)?.quantity || 0;
