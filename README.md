@@ -51,13 +51,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 In order to test the 'discounts' functionality use the following codes:
 
 
-###DISC10  >>>> For 10% of discount
+### DISC10  >>>> For 10% of discount
 
 
-###DISC20  >>>> For 20% of discount
+### DISC20  >>>> For 20% of discount
 
 
-###DISC30  >>>> For 30% of discount
+### DISC30  >>>> For 30% of discount
 
 
 
