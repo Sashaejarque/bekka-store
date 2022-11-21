@@ -1,10 +1,15 @@
+/* eslint-disable react/no-unescaped-entities */
 import {
   Divider,
+  FormControl,
   Grid,
   InputAdornment,
+  InputLabel,
+  MenuItem,
   TextField,
   Typography,
 } from "@mui/material";
+import Select from "@mui/material/Select";
 import React, { useEffect, useState } from "react";
 import { getCategories } from "../services/categories";
 import { Layout } from "../templates";
@@ -20,6 +25,7 @@ const IndexPage = () => {
   const [allProducts, setAllProducts] = useState<Products[]>([]);
   const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState("");
 
   const categories = async () => {
     try {
@@ -37,6 +43,13 @@ const IndexPage = () => {
     if (filter === "") {
       return product;
     } else if (product.title.toLowerCase().includes(filter.toLowerCase())) {
+      return product;
+    }
+  });
+  const productsFilterByCategory = filteredProducts.filter((product) => {
+    if (category === "") {
+      return product;
+    } else if (product.category === category) {
       return product;
     }
   });
@@ -68,20 +81,51 @@ const IndexPage = () => {
         <Typography sx={{ fontWeight: 600, fontSize: 40 }}>
           All products
         </Typography>
-        <TextField
-          id="input-with-icon-textfield"
-          sx={{ width: "90%", marginTop: 4 }}
-          label="Search for products"
-          onChange={(e) => setFilter(e.target.value)}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-          variant="outlined"
-        />
+      </Grid>
+      <Grid
+        container
+        item
+        xs={12}
+        justifyContent="center"
+        alignItems="center"
+        m={2}
+        spacing={2}
+      >
+        <Grid item xs={12} md={9}>
+          <TextField
+            id="input-with-icon-textfield"
+            sx={{ width: "100%", marginTop: 4 }}
+            label="Search for products"
+            onChange={(e) => setFilter(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <FormControl sx={{ width: "100%", marginTop: 4 }}>
+            <InputLabel id="select-category">Filter by category</InputLabel>
+            <Select
+              labelId="select-category"
+              id="simple-select-category"
+              value={category}
+              label="Filter by category"
+              onChange={e => setCategory(e.target.value)}
+              sx={{ width: "100%" }}
+            >
+              <MenuItem value="">All categories</MenuItem>
+              <MenuItem value='electronics'>Electronics</MenuItem>
+              <MenuItem value='jewelery'>Jewelery</MenuItem>
+              <MenuItem value="men's clothing">Men's clothing</MenuItem>
+              <MenuItem value="women's clothing">Women's clothing</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
       </Grid>
       <Grid container item xs={12} spacing={2}>
         {loading ? (
@@ -89,7 +133,7 @@ const IndexPage = () => {
             <CircularProgress />
           </Grid>
         ) : (
-          filteredProducts.map((product) => (
+          productsFilterByCategory.map((product) => (
             <Grid
               container
               item
@@ -110,7 +154,7 @@ const IndexPage = () => {
             </Grid>
           ))
         )}
-        {filteredProducts.length === 0 && !loading && (
+        {productsFilterByCategory.length === 0 && !loading && (
           <Grid item xs={12}>
             <Typography
               textAlign="center"

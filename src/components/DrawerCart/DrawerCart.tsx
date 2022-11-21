@@ -222,7 +222,7 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
                       sx={{ fontSize: 14, fontWeight: "bold", marginBottom: 2 }}
                       textAlign="center"
                     >
-                      Descuento aplicado: {isDiscountApplied}%
+                      Applied discount: {isDiscountApplied}%
                     </Typography>
                   </Grid>
                 )}

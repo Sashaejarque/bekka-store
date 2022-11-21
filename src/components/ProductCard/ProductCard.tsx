@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   Card,
@@ -40,7 +41,7 @@ const style = {
   },
 };
 const ProductCard: FC<Props> = ({ image, title, price, id }) => {
-  const { addToCart, getItemQuantity } = useShoppingCart();
+  const { addToCart, getItemQuantity, decreaseCartQuantity, cart} = useShoppingCart();
 
   const [quantity, setQuantity] = useState(getItemQuantity(id));
   const [showCounter, setShowCounter] = useState(quantity > 0 );
@@ -50,12 +51,17 @@ const ProductCard: FC<Props> = ({ image, title, price, id }) => {
   };
 
   const handleRemove = () => {
-    if (quantity > 0) {
+    if (getItemQuantity(id) > 0) {
       setQuantity(quantity - 1);
+      decreaseCartQuantity(id);
     } else {
       setQuantity(0);
     }
   };
+
+  useEffect(() => {
+    setQuantity(getItemQuantity(id));
+  }, [cart, id]);
 
   return (
     <Card sx={style.cardContainer}>
@@ -75,9 +81,9 @@ const ProductCard: FC<Props> = ({ image, title, price, id }) => {
         <Grid container justifyContent="center" paddingBottom={2}>
           { showCounter && (
             <Counter
-              count={quantity}
+              count={getItemQuantity(id)}
               onClickAdd={() => { addToCart(id, quantity + 1, price, image, title); handleAdd(); }}
-              onClickRemove={() => {handleRemove(); handleRemove() }}
+              onClickRemove={() => handleRemove()}
             />
           )}
           <Button
