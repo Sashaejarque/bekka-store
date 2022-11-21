@@ -21,16 +21,16 @@ interface Props {
 }
 
 const styles = {
-    title: {
-        fontSize: 24,
-        fontWeight: 600,
-    },
-    button: {
-        width: 250,
-        height: 40,
-        backgroundColor: "black",
-        color: "white",
-    },
+  title: {
+    fontSize: 24,
+    fontWeight: 600,
+  },
+  button: {
+    width: 250,
+    height: 40,
+    backgroundColor: "black",
+    color: "white",
+  },
 };
 
 const CategoryCard: FC<Props> = ({ categoryName }) => {
@@ -71,8 +71,15 @@ const CategoryCard: FC<Props> = ({ categoryName }) => {
         sx={{ maxHeight: 500, maxWidth: responsiveWidth }}
       />
       <CardContent>
-        <Grid container justifyContent="center" flexDirection="column" alignItems="center">
-          <Typography style={styles.title} textAlign="center">{textFormatted}</Typography>
+        <Grid
+          container
+          justifyContent="center"
+          flexDirection="column"
+          alignItems="center"
+        >
+          <Typography style={styles.title} textAlign="center">
+            {textFormatted}
+          </Typography>
           <Button size="small" style={styles.button}>
             <Link href={handleRoute(categoryName)}>See more</Link>
           </Button>

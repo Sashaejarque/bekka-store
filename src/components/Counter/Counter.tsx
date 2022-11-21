@@ -10,29 +10,29 @@ interface Props {
 }
 
 const styles = {
-    container: {
-        width: 80,
-        heigth: 50,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-        flexDirection: "grow",  
-    },
-    icon: {
-        width: 20,
-        height: 20,
-    }
+  container: {
+    width: 80,
+    heigth: 50,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexDirection: "grow",
+  },
+  icon: {
+    width: 20,
+    height: 20,
+  },
 };
 
 const Counter: FC<Props> = ({ count, onClickRemove, onClickAdd }) => {
   return (
     <Box sx={styles.container}>
       <IconButton onClick={onClickRemove} sx={styles.icon}>
-        <RemoveIcon sx={styles.icon}/>
+        <RemoveIcon sx={styles.icon} />
       </IconButton>
       <Typography>{count}</Typography>
       <IconButton onClick={onClickAdd} sx={styles.icon}>
-        <AddIcon sx={styles.icon}/>
+        <AddIcon sx={styles.icon} />
       </IconButton>
     </Box>
   );

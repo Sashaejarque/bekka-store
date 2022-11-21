@@ -2,7 +2,6 @@
 import React, { FC, useEffect, useMemo, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import {
-  Accordion,
   Button,
   Divider,
   Grid,
@@ -42,6 +41,7 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
   const [inputDiscount, setInputDiscount] = useState("");
   const [isDiscountApplied, setIsDiscountApplied] = useState(0);
   const [total, setTotal] = useState(0);
+
   const { width, height } = useResponsiveScreen();
   const responsiveWidth = useMemo(
     () => (width <= 800 ? width : width * 0.4),
@@ -49,15 +49,6 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
   );
   const responsiveHeight = useMemo(() => height, [height]);
 
-  /* const totalCart = useMemo(() => {
-    return cart.reduce((acc, item) => {
-      if (item.quantity != 0) {
-        return acc + item.price * item.quantity;
-      } else {
-        return acc + item.price;
-      }
-    }, 0);
-  }, [cart]); */
   const reacalculateTotal = () => {
     let totalCart = cart.reduce((acc, item) => {
       if (item.quantity != 0) {
@@ -197,14 +188,19 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
                     </Grid>
                   </Grid>
                   {isDiscountApplied !== 0 && (
-                  <Grid item xs={4}>
-                    <Typography
-                      sx={{ fontSize: 14, fontWeight: "bold", marginTop: 2, marginLeft: 1 }}
-                    >
-                      Applied discount: {isDiscountApplied}%
-                    </Typography>
-                  </Grid>
-                )}
+                    <Grid item xs={4}>
+                      <Typography
+                        sx={{
+                          fontSize: 14,
+                          fontWeight: "bold",
+                          marginTop: 2,
+                          marginLeft: 1,
+                        }}
+                      >
+                        Applied discount: {isDiscountApplied}%
+                      </Typography>
+                    </Grid>
+                  )}
                 </AccordionComponent>
               </Grid>
               <Grid

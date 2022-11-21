@@ -36,14 +36,7 @@ const WomenClothing = () => {
 
   return (
     <Layout>
-      <Grid
-        container
-        spacing={10}
-        justifyContent="center"
-        alignItems="center"
-        mb={2}
-        mt={4}
-      >
+      <Grid container item xs={12} justifyContent="center" mt={6} spacing={4}>
         <Grid
           container
           item

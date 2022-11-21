@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { API_URL } from '../constants/server';
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const getJeweleryProducts = async () => {
     const response = await axios.get(`${API_URL}/products/category/jewelery`);

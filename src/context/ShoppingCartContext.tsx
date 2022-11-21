@@ -3,7 +3,6 @@ import {
   FC,
   PropsWithChildren,
   useContext,
-  useState,
 } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 

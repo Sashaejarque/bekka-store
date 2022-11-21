@@ -41,10 +41,11 @@ const style = {
   },
 };
 const ProductCard: FC<Props> = ({ image, title, price, id }) => {
-  const { addToCart, getItemQuantity, decreaseCartQuantity, cart} = useShoppingCart();
+  const { addToCart, getItemQuantity, decreaseCartQuantity, cart } =
+    useShoppingCart();
 
   const [quantity, setQuantity] = useState(getItemQuantity(id));
-  const [showCounter, setShowCounter] = useState(quantity > 0 );
+  const [showCounter, setShowCounter] = useState(quantity > 0);
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
@@ -79,10 +80,13 @@ const ProductCard: FC<Props> = ({ image, title, price, id }) => {
       </CardContent>
       <CardActions>
         <Grid container justifyContent="center" paddingBottom={2}>
-          { showCounter && (
+          {showCounter && (
             <Counter
               count={getItemQuantity(id)}
-              onClickAdd={() => { addToCart(id, quantity + 1, price, image, title); handleAdd(); }}
+              onClickAdd={() => {
+                addToCart(id, quantity + 1, price, image, title);
+                handleAdd();
+              }}
               onClickRemove={() => handleRemove()}
             />
           )}

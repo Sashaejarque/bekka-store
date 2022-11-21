@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Badge, Divider, Grid, Typography } from "@mui/material";
+import { Badge, Grid } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React, { useMemo, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";

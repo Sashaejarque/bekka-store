@@ -12,7 +12,12 @@ const CategoryCarousel: FC<Props> = ({ data }) => {
 
   return (
     <Carousel
-      style={{ height: 440, width: responsiveWidth, borderStyle: 'solid', borderWidth: 1 }}
+      style={{
+        height: 440,
+        width: responsiveWidth,
+        borderStyle: "solid",
+        borderWidth: 1,
+      }}
     >
       {data.map((category) => (
         <CategoryCard categoryName={category} key={category} />

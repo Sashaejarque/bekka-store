@@ -13,20 +13,21 @@ interface Props {
   title: string;
 }
 const style = {
-    title: {
-        fontSize: 12,
-    },
-    icon: {
-      display: 'flex',
-      alignItems: 'center',
-      width: 18,
-      height: 17,
-      marginRigth: 1,
-    },
+  title: {
+    fontSize: 12,
+  },
+  icon: {
+    display: "flex",
+    alignItems: "center",
+    width: 18,
+    height: 17,
+    marginRigth: 1,
+  },
 };
 
 const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
-    const { removeFromCart, addToCart, decreaseCartQuantity } = useShoppingCart();
+  const { removeFromCart, addToCart, decreaseCartQuantity } = useShoppingCart();
+
   return (
     <Box mt={2} sx={{ width: "90%", minHeight: 80 }}>
       <Card sx={{ display: "flex", minHeight: 80 }}>
@@ -53,17 +54,11 @@ const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
             onClickRemove={() => decreaseCartQuantity(id)}
           />
         </Grid>
-        <Grid
-          container
-          item
-          xs={3}
-          alignItems="center"
-          justifyContent="center"
-        >
+        <Grid container item xs={3} alignItems="center" justifyContent="center">
           <Typography>${price}</Typography>
         </Grid>
         <Grid container item xs={1} alignItems="center">
-        <IconButton onClick={() => removeFromCart(id)} sx={style.icon}>
+          <IconButton onClick={() => removeFromCart(id)} sx={style.icon}>
             <DeleteIcon sx={style.icon} />
           </IconButton>
         </Grid>

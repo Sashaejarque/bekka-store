@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { API_URL } from '../constants/server';
 
 export const getCategories = async () => {
-    const response = await axios.get(`${API_URL}/products/categories`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/products/categories`);
     return response;
 };

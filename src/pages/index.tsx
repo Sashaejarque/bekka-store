@@ -115,12 +115,12 @@ const IndexPage = () => {
               id="simple-select-category"
               value={category}
               label="Filter by category"
-              onChange={e => setCategory(e.target.value)}
+              onChange={(e) => setCategory(e.target.value)}
               sx={{ width: "100%" }}
             >
               <MenuItem value="">All categories</MenuItem>
-              <MenuItem value='electronics'>Electronics</MenuItem>
-              <MenuItem value='jewelery'>Jewelery</MenuItem>
+              <MenuItem value="electronics">Electronics</MenuItem>
+              <MenuItem value="jewelery">Jewelery</MenuItem>
               <MenuItem value="men's clothing">Men's clothing</MenuItem>
               <MenuItem value="women's clothing">Women's clothing</MenuItem>
             </Select>
