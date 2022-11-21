@@ -111,7 +111,7 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
       >
         <Grid
           container
-          justifyContent="flex-end"
+          justifyContent="center"
           alignItems="center"
           mt={2}
           mr={2}
@@ -160,7 +160,7 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
         </Grid>
         {cart.length > 0 && (
           <>
-            <Grid container sx={{ height: 140 }}>
+            <Grid container mt={3}>
               <Grid
                 container
                 item
@@ -196,6 +196,15 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
                       </Button>
                     </Grid>
                   </Grid>
+                  {isDiscountApplied !== 0 && (
+                  <Grid item xs={4}>
+                    <Typography
+                      sx={{ fontSize: 14, fontWeight: "bold", marginTop: 2, marginLeft: 1 }}
+                    >
+                      Applied discount: {isDiscountApplied}%
+                    </Typography>
+                  </Grid>
+                )}
                 </AccordionComponent>
               </Grid>
               <Grid
@@ -216,16 +225,6 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
                 ml={6}
                 mb={2}
               >
-                {isDiscountApplied !== 0 && (
-                  <Grid item xs={12}>
-                    <Typography
-                      sx={{ fontSize: 14, fontWeight: "bold", marginBottom: 2 }}
-                      textAlign="center"
-                    >
-                      Applied discount: {isDiscountApplied}%
-                    </Typography>
-                  </Grid>
-                )}
                 <Typography
                   variant="h5"
                   sx={[styles.title, { marginBottom: 2 }]}
