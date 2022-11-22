@@ -15,6 +15,7 @@ export interface ShoppingCartContext {
         removeItem: (item: Products) => void;
         getItemQuantity: (item: Products) => number;
         resetItemQuantity: (item: Products) => void;
+        getItemsFromLocalStorage: () => void;
 
     }
 };

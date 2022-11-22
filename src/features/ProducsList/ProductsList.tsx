@@ -5,9 +5,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
-import Products from "../../models/Product";
 import SearchAndFilter from "./components/SearchAndFilter";
-import { fetchAllProducts } from "../../services/products";
 import { filteredProducts } from "./utils/filteredProducts";
 import { useProductListContext } from "./context/ProductsListProvider";
 

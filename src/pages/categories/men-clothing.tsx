@@ -6,9 +6,11 @@ import { getMenClothingProducts } from "../../services/products";
 import { Layout } from "../../templates";
 import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
 
 const MenClothing = () => {
   const [products, setProducts] = useState<Products[]>([]);
+  const { actions: { getItemsFromLocalStorage } } = useShoppingCart();
   const [filter, setFilter] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,7 +34,8 @@ const MenClothing = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+    getItemsFromLocalStorage();
+  }, [getItemsFromLocalStorage]);
   return (
     <Layout>
       <Grid container item xs={12} justifyContent="center" mt={6} spacing={4} mb={4}>

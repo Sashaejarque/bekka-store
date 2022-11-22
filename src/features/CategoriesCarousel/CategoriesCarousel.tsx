@@ -22,7 +22,7 @@ const CategoriesCarousel = () => {
 
   return (
     <>
-      <Grid container item xs={12} justifyContent="center" mt={6}>
+      <Grid container item xs={12} mt={6} ml={4}>
         <Typography sx={{ fontWeight: 600, fontSize: 40 }}>
           All categories
         </Typography>

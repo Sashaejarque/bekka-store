@@ -71,6 +71,12 @@ export default function shoppingCartReducer (
                     return item;
                 })
             }
+        case 'GET_ITEMS_FROM_LOCAL_STORAGE':
+            const itemsFromLocalStorage = action.payload;
+            return {
+                ...state,
+                items: itemsFromLocalStorage
+            }
                 
     }
 }

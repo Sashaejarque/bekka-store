@@ -6,9 +6,11 @@ import { Layout } from "../../templates";
 import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from "@mui/material/CircularProgress";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
 
 const Electronic = () => {
   const [products, setProducts] = useState<Products[]>([]);
+  const { actions: { getItemsFromLocalStorage } } = useShoppingCart();
   const [filter, setFilter] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,7 +33,8 @@ const Electronic = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+    getItemsFromLocalStorage();
+  }, [getItemsFromLocalStorage]);
 
   return (
     <Layout>

@@ -51,7 +51,7 @@ const ProductCard: FC<Props> = ({item}) => {
     } 
   } = useShoppingCart();
   const [quantity, setQuantity] = useState(getItemQuantity(item));
-  const [showCounter, setShowCounter] = useState(false);
+  const [showCounter, setShowCounter] = useState(quantity > 0);
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
@@ -80,6 +80,7 @@ const ProductCard: FC<Props> = ({item}) => {
   useEffect(() => {
     setQuantity(getItemQuantity(item));
   }, [items]);
+
   return (
     <Card sx={style.cardContainer}>
       <div style={style.containerImage}>

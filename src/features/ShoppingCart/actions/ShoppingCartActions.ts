@@ -1,4 +1,5 @@
 import Products from "../../../models/Product";
+import { ShoppingCartItem } from "../reducer/shoppingCartReducer";
 
 
 interface AddProductToCart {
@@ -26,11 +27,17 @@ interface resetQuantity {
     payload: Products;
 }
 
+interface getItemsFromLocalStorage {
+    type: 'GET_ITEMS_FROM_LOCAL_STORAGE';
+    payload: ShoppingCartItem[];
+}
+
 type ShoppingCartActions = 
   AddProductToCart 
 | IncreaseOneProductToCart 
 | DecrementOneProductToCart 
 | RemoveProductFromCart
-| resetQuantity;
+| resetQuantity
+| getItemsFromLocalStorage;
 
 export default ShoppingCartActions;
