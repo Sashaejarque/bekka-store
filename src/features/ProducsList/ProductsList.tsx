@@ -9,30 +9,20 @@ import Products from "../../models/Product";
 import SearchAndFilter from "./components/SearchAndFilter";
 import { fetchAllProducts } from "../../services/products";
 import { filteredProducts } from "./utils/filteredProducts";
-import { useProductListContext } from "./context/ProductsListContext";
+import { useProductListContext } from "./context/ProductsListProvider";
 
 const ProductsList = () => {
-  const [allProducts, setAllProducts] = useState<Products[]>([]);
-  const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState("");
   const [category, setCategory] = useState("");
+  const { state: { products, loading }, actions: { getAllProducts }  } = useProductListContext();
 
   const productsFiltered = useMemo(() => {
-    return filteredProducts(allProducts, filter, category);
-  }, [allProducts, filter, category])
+    return filteredProducts(products, filter, category);
+  }, [products, filter, category])
 
   useEffect(() => {
-    (async () => {
-      try {
-        const categories = await fetchAllProducts();
-        setAllProducts(categories.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+    getAllProducts();
+  }, [getAllProducts]);
 
   return (
     <>
