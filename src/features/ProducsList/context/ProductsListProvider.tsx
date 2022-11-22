@@ -23,7 +23,7 @@ export const ProductListProvider: FC<PropsWithChildren> = ({ children }) => {
     try {
       dispatch({ type: "SET_LOADING_TRUE" });
       const categories = await fetchAllProducts();
-      dispatch({ type: "ADD_PRODUCTS_TO_STATE", payload: categories.data });
+      dispatch({ type: "ADD_PRODUCTS_TO_STATE", payload: categories?.data });
       dispatch({ type: "SET_LOADING_FALSE" });
     } catch (error) {
       console.error(error);

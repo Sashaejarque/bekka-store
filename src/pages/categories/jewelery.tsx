@@ -15,7 +15,7 @@ const JewelryPage = () => {
   const getProducts = async () => {
     try {
       const response = await getJeweleryProducts();
-      setProducts(response.data);
+      setProducts(response?.data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -77,12 +77,7 @@ const JewelryPage = () => {
                 marginRight: 3,
               }}
             >
-              <ProductCard
-                image={product.image}
-                title={product.title}
-                price={product.price}
-                id={product.id}
-              />
+              <ProductCard item={product}/>
             </Grid>
           ))
         )}

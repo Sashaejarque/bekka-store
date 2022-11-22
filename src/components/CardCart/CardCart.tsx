@@ -3,15 +3,13 @@ import { Box, Card, Grid, IconButton, Typography } from "@mui/material";
 import React, { FC } from "react";
 import Counter from "../Counter/Counter";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
+import { ShoppingCartItem } from "../../features/ShoppingCart/reducer/shoppingCartReducer";
 
 interface Props {
-  id: number;
-  quantity: number;
-  price: number;
-  image: string;
-  title: string;
+  item: ShoppingCartItem;
 }
+
 const style = {
   title: {
     fontSize: 12,
@@ -25,9 +23,17 @@ const style = {
   },
 };
 
-const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
-  const { removeFromCart, addToCart, decreaseCartQuantity } = useShoppingCart();
+const CardCart: FC<Props> = ({ item }) => {
+  const { actions: { increaseOneProductToCart, decrementOneProductToCart, removeItem, getItemQuantity } } = useShoppingCart();
 
+  const handleRemove = () => {
+    if(getItemQuantity(item.product) > 0) {
+      decrementOneProductToCart(item.product);
+    }
+    if (getItemQuantity(item.product) === 1) {
+      removeItem(item.product);
+    }
+  };
   return (
     <Box mt={2} sx={{ width: "90%", minHeight: 80 }}>
       <Card sx={{ display: "flex", minHeight: 80 }}>
@@ -35,7 +41,7 @@ const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
           <img
             alt="prueba"
             style={{ maxWidth: 75, maxHeight: 60 }}
-            src={image}
+            src={item.product.image}
           />
         </Grid>
         <Grid
@@ -47,18 +53,18 @@ const CardCart: FC<Props> = ({ image, title, quantity, price, id }) => {
           flexDirection="column"
           paddingLeft={3}
         >
-          <Typography sx={style.title}>{title}</Typography>
+          <Typography sx={style.title}>{item.product.title}</Typography>
           <Counter
-            count={quantity}
-            onClickAdd={() => addToCart(id, quantity + 1, price, image, title)}
-            onClickRemove={() => decreaseCartQuantity(id)}
+            count={item.quantity}
+            onClickAdd={() => increaseOneProductToCart(item.product)}
+            onClickRemove={() => handleRemove()}
           />
         </Grid>
         <Grid container item xs={3} alignItems="center" justifyContent="center">
-          <Typography>${price}</Typography>
+          <Typography>${item.product.price}</Typography>
         </Grid>
         <Grid container item xs={1} alignItems="center">
-          <IconButton onClick={() => removeFromCart(id)} sx={style.icon}>
+          <IconButton onClick={() => removeItem(item.product)} sx={style.icon}>
             <DeleteIcon sx={style.icon} />
           </IconButton>
         </Grid>

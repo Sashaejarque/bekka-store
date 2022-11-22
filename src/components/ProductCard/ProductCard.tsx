@@ -9,14 +9,12 @@ import {
   Typography,
 } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
+import Products from "../../models/Product";
 import Counter from "../Counter/Counter";
 
 interface Props {
-  image: string;
-  title: string;
-  price: number;
-  id: number;
+  item: Products;
 }
 const style = {
   containerImage: {
@@ -40,51 +38,69 @@ const style = {
     flexDirection: "column",
   },
 };
-const ProductCard: FC<Props> = ({ image, title, price, id }) => {
-  const { addToCart, getItemQuantity, decreaseCartQuantity, cart } =
-    useShoppingCart();
-
-  const [quantity, setQuantity] = useState(getItemQuantity(id));
-  const [showCounter, setShowCounter] = useState(quantity > 0);
+const ProductCard: FC<Props> = ({item}) => {
+  const {
+    state: { items }, 
+    actions: { 
+      addProductToCart, 
+      increaseOneProductToCart, 
+      decrementOneProductToCart,
+      getItemQuantity,
+      removeItem,
+      resetItemQuantity
+    } 
+  } = useShoppingCart();
+  const [quantity, setQuantity] = useState(getItemQuantity(item));
+  const [showCounter, setShowCounter] = useState(false);
 
   const handleAdd = () => {
     setQuantity(quantity + 1);
   };
 
   const handleRemove = () => {
-    if (getItemQuantity(id) > 0) {
+    if (getItemQuantity(item) > 0) {
       setQuantity(quantity - 1);
-      decreaseCartQuantity(id);
-    } else {
-      setQuantity(0);
+      decrementOneProductToCart(item);
+    } 
+    if(quantity === 1 ) {
+      removeItem(item);
+      setShowCounter(false);
     }
   };
 
-  useEffect(() => {
-    setQuantity(getItemQuantity(id));
-  }, [cart, id]);
+  const handleAddProductToCart = () => {
+    if(quantity > 1) {
+      resetItemQuantity(item);
+    }
+      addProductToCart(item);
+      setQuantity(1);
+      setShowCounter(true);
+  }
 
+  useEffect(() => {
+    setQuantity(getItemQuantity(item));
+  }, [items]);
   return (
     <Card sx={style.cardContainer}>
       <div style={style.containerImage}>
         <CardMedia
           component="img"
-          image={image}
-          alt={title}
+          image={item.image}
+          alt={item.title}
           sx={{ maxHeight: 200, objectFit: "contain", maxWidth: 300 }}
         />
       </div>
       <CardContent>
-        <Typography textAlign="center">{title}</Typography>
-        <Typography textAlign="center">${price}</Typography>
+        <Typography textAlign="center">{item.title}</Typography>
+        <Typography textAlign="center">${item.price}</Typography>
       </CardContent>
       <CardActions>
         <Grid container justifyContent="center" paddingBottom={2}>
-          {showCounter && (
+          {showCounter && quantity > 0 && (
             <Counter
-              count={getItemQuantity(id)}
+              count={quantity}
               onClickAdd={() => {
-                addToCart(id, quantity + 1, price, image, title);
+                increaseOneProductToCart(item);
                 handleAdd();
               }}
               onClickRemove={() => handleRemove()}
@@ -93,11 +109,7 @@ const ProductCard: FC<Props> = ({ image, title, price, id }) => {
           <Button
             sx={[style.button, { backgroundColor: "black" }]}
             size="small"
-            onClick={() => {
-              addToCart(id, 1, price, image, title);
-              setQuantity(1);
-              setShowCounter(true);
-            }}
+            onClick={() => handleAddProductToCart()}
           >
             <Typography sx={{ color: "white" }}>Add to cart</Typography>
           </Button>

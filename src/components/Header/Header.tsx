@@ -3,9 +3,9 @@ import { Badge, Grid } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import React, { useMemo, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import DrawerCart from "../DrawerCart/DrawerCart";
 import useResponsiveScreen from "../../hooks/useResponsiveScreen";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
+import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
+import ShoppingCart from "../../features/ShoppingCart/ShoppingCart";
 
 const styles = {
   container: {
@@ -28,7 +28,7 @@ const styles = {
 };
 const Header = () => {
   const [drawer, setDrawer] = useState(false);
-  const { cart } = useShoppingCart();
+  const { state: { items } } = useShoppingCart();
   const { width } = useResponsiveScreen();
   const responsiveWidth = useMemo(() => width * 0.02, [width]);
 
@@ -45,8 +45,8 @@ const Header = () => {
     return 6;
   }, [width]);
   const totalItemsCart = useMemo(() => {
-    return cart.reduce((acc, item) => acc + item.quantity, 0);
-  }, [cart]);
+    return items.reduce((acc, item) => acc + item.quantity, 0);
+  }, [items]);
   return (
     <>
       <Grid
@@ -89,7 +89,7 @@ const Header = () => {
           </Badge>
         </Grid>
       </Grid>
-      <DrawerCart open={drawer} onClose={toggleDrawer} />
+      <ShoppingCart open={drawer} onClose={toggleDrawer} />
     </>
   );
 };

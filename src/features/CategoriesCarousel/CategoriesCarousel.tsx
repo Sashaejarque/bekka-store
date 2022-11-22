@@ -11,7 +11,7 @@ const CategoriesCarousel = () => {
     (async () => {
       try {
         const categories = await getCategories();
-        setCategoriesList(categories.data);
+        setCategoriesList(categories?.data);
     } catch (error) {
         console.error(error);
     } finally {

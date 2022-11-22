@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import useResponsiveScreen from "../../hooks/useResponsiveScreen";
-import CardCart from "../CardCart/CardCart";
-import { useShoppingCart } from "../../context/ShoppingCartContext";
-import AccordionComponent from "../Acorddion/Accordion";
+import CardCart from "../../components/CardCart/CardCart";
+import { useShoppingCart } from "./context/ShoppingCartProvider";
+import AccordionComponent from "../../components/Acorddion/Accordion";
 
 interface Props {
   open: boolean;
@@ -36,8 +36,8 @@ const styles = {
     },
   },
 };
-const DrawerCart: FC<Props> = ({ open, onClose }) => {
-  const { cart } = useShoppingCart();
+const ShoppingCart: FC<Props> = ({ open, onClose }) => {
+  const { state: { items} } = useShoppingCart();
   const [inputDiscount, setInputDiscount] = useState("");
   const [isDiscountApplied, setIsDiscountApplied] = useState(0);
   const [total, setTotal] = useState(0);
@@ -50,11 +50,11 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
   const responsiveHeight = useMemo(() => height, [height]);
 
   const reacalculateTotal = () => {
-    let totalCart = cart.reduce((acc, item) => {
+    let totalCart = items.reduce((acc, item) => {
       if (item.quantity != 0) {
-        return acc + item.price * item.quantity;
+        return acc + item.product.price * item.quantity;
       } else {
-        return acc + item.price;
+        return acc + item.product.price;
       }
     }, 0);
     if (isDiscountApplied === 10) {
@@ -71,7 +71,7 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
   };
   useEffect(() => {
     reacalculateTotal();
-  }, [total, isDiscountApplied, cart]);
+  }, [total, isDiscountApplied, items]);
 
   const handleDiscount = () => {
     if (inputDiscount === "DISC10") {
@@ -120,7 +120,7 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
           <Grid container item xs={12} justifyContent="center">
             <Divider sx={styles.divider} />
           </Grid>
-          {cart.length === 0 && (
+          {items.length === 0 && (
             <Grid item xs={12} ml={2} mt={10}>
               <Typography
                 textAlign="center"
@@ -130,26 +130,20 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
               </Typography>
             </Grid>
           )}
-          {cart.length !== 0 &&
-            cart.map((item) => (
+          {items.length !== 0 &&
+            items.map((item) => (
               <Grid
                 container
                 item
                 xs={12}
                 justifyContent="center"
-                key={item.id}
+                key={item.product.id}
               >
-                <CardCart
-                  id={item.id}
-                  image={item.image}
-                  title={item.title}
-                  price={item.price}
-                  quantity={item.quantity}
-                />
+                <CardCart item={item} />
               </Grid>
             ))}
         </Grid>
-        {cart.length > 0 && (
+        {items.length > 0 && (
           <>
             <Grid container mt={3}>
               <Grid
@@ -239,4 +233,4 @@ const DrawerCart: FC<Props> = ({ open, onClose }) => {
   );
 };
 
-export default DrawerCart;
+export default ShoppingCart;

@@ -15,7 +15,7 @@ const WomenClothing = () => {
   const getProducts = async () => {
     try {
       const response = await getWomenClothingProducts();
-      setProducts(response.data);
+      setProducts(response?.data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -78,12 +78,7 @@ const WomenClothing = () => {
                 marginRight: 3,
               }}
             >
-              <ProductCard
-                image={product.image}
-                title={product.title}
-                price={product.price}
-                id={product.id}
-              />
+              <ProductCard item={product} />
             </Grid>
           ))
         )}

@@ -65,12 +65,7 @@ const ProductsList = () => {
               alignItems="center"
               mb={4}
             >
-              <ProductCard
-                image={product.image}
-                title={product.title}
-                price={product.price}
-                id={product.id}
-              />
+              <ProductCard item={product} />
             </Grid>
           ))
         )}
