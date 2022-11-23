@@ -1,10 +1,8 @@
-export class StorageHandler {
+export class StorageShoppingCart {
   key: string;
-  storage: any;
 
-  constructor(key: string /*  storage: any */) {
+  constructor(key: string) {
     this.key = key;
-    /* this.storage = storage; */
   }
 
   getData() {

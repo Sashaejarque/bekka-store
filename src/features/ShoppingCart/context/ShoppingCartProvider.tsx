@@ -10,7 +10,7 @@ import Products from "../../../models/Product";
 import shoppingCartReducer, {
   ShoppingCartItem,
 } from "../reducer/shoppingCartReducer";
-import { StorageHandler } from "../utils/StorageHandler";
+import { StorageShoppingCart } from "../utils/StorageShoppingCart";
 import { ShoppingCartContext } from "./CreateShoppingCardContext";
 
 export const ShoppingCartProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -18,7 +18,7 @@ export const ShoppingCartProvider: FC<PropsWithChildren> = ({ children }) => {
     loading: false,
     items: [],
   });
-  const storage = useMemo(() => new StorageHandler("shopping-cart"), []);
+  const storage = useMemo(() => new StorageShoppingCart("shopping-cart"), []);
 
   const getItemsFromLocalStorage = useCallback(() => {
     let items: ShoppingCartItem[] = [];

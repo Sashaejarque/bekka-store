@@ -24,6 +24,7 @@ const AccordionComponent: FC<Props> = ({ children, title }) => {
       expanded={expanded === "panel1"}
       onChange={handleChange("panel1")}
       sx={{ width: "95%" }}
+      data-testid="accordion"
     >
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}

@@ -6,11 +6,11 @@ This application is made with next js, typescript and ui material
 
 ### Components:
 
-Is where the dumbs components are located
+The components module contains the dummy components of the ui
 
 ### Templates: 
 
-In templates I store the components that structure the UI
+The template module contains the components that structure the UI
 
 ### Services: 
 
@@ -22,17 +22,14 @@ The 'pages' are in charge of the app routing.
 
 ### Models: 
 
-This is where I store the typescript interfaces shared by several components
+Typescript interfaces shared by several components
 
 ### Hooks
 
-The customs hooks are saved here
+This module contains custom hooks 
 
-### Context: 
-
-Contains global state logic
-
-
+### Feature: 
+This module contains the feature specific logic. Within this module we can have other modules such as context, actions, reducers, utils and components
 ## Getting Started
 
 First, run the development server:

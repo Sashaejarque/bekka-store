@@ -20,7 +20,7 @@ const CategoryCarousel: FC<Props> = ({ data }) => {
       }}
     >
       {data.map((category) => (
-        <CategoryCard categoryName={category} key={category} />
+        <CategoryCard categoryName={category} key={category} data-testid={`${category}-id`}/>
       ))}
     </Carousel>
   );

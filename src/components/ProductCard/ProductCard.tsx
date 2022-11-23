@@ -67,11 +67,12 @@ const ProductCard: FC<Props> = ({ item }) => {
           image={item.image}
           alt={item.title}
           sx={{ maxHeight: 200, objectFit: "contain", maxWidth: 300 }}
+          data-testid="image"
         />
       </div>
       <CardContent>
-        <Typography textAlign="center">{item.title}</Typography>
-        <Typography textAlign="center">${item.price}</Typography>
+        <Typography textAlign="center" data-testid="titleProduct">{item.title}</Typography>
+        <Typography textAlign="center" data-testid="priceProduct">${item.price}</Typography>
       </CardContent>
       <CardActions>
         <Grid container justifyContent="center" paddingBottom={2}>
@@ -83,12 +84,14 @@ const ProductCard: FC<Props> = ({ item }) => {
                 handleAdd();
               }}
               onClickRemove={() => handleRemove()}
+              data-testid="counter"
             />
           )}
           <Button
             sx={[style.button, { backgroundColor: "black" }]}
             size="small"
             onClick={() => handleAddProductToCart()}
+            data-testid="addButtonProduct"
           >
             <Typography sx={{ color: "white" }}>Add to cart</Typography>
           </Button>

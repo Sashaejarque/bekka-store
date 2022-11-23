@@ -76,6 +76,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
       onClose={() => onClose()}
       transitionDuration={500}
       className="MuiDrawer-paperAnchorRigth"
+      data-testid="shopping-cart"
     >
       <div
         style={{

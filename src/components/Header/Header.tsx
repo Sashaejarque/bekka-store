@@ -51,6 +51,7 @@ const Header = () => {
             alt="FirstClose"
             style={styles.img}
             onClick={() => goToHome()}
+            data-testid="logo"
           />
         </Grid>
         <Grid
@@ -66,13 +67,14 @@ const Header = () => {
             <IconButton
               aria-label="add to shopping cart"
               onClick={() => toggleDrawer()}
+              data-testid="shopping-cart-button"
             >
               <ShoppingCartIcon color="primary" />
             </IconButton>
           </Badge>
         </Grid>
       </Grid>
-      <ShoppingCart open={drawer} onClose={toggleDrawer} />
+      <ShoppingCart open={drawer} onClose={toggleDrawer} data-testid="shopping-cart" />
     </>
   );
 };
