@@ -1,8 +1,4 @@
-import {
-  CircularProgress,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { CircularProgress, Grid, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import SearchAndFilter from "./components/SearchAndFilter";
@@ -12,11 +8,14 @@ import { useProductListContext } from "./context/ProductsListProvider";
 const ProductsList = () => {
   const [filter, setFilter] = useState("");
   const [category, setCategory] = useState("");
-  const { state: { products, loading }, actions: { getAllProducts }  } = useProductListContext();
+  const {
+    state: { products, loading },
+    actions: { getAllProducts },
+  } = useProductListContext();
 
   const productsFiltered = useMemo(() => {
     return filteredProducts(products, filter, category);
-  }, [products, filter, category])
+  }, [products, filter, category]);
 
   useEffect(() => {
     getAllProducts();
@@ -28,7 +27,6 @@ const ProductsList = () => {
         <Typography sx={{ fontWeight: 600, fontSize: 40 }}>
           All products
         </Typography>
-
       </Grid>
       <Grid
         container
@@ -36,8 +34,9 @@ const ProductsList = () => {
         xs={12}
         justifyContent="center"
         alignItems="center"
-        m={2}
         spacing={2}
+        ml={2}
+        mr={2}
       >
         <SearchAndFilter
           selectValue={category}

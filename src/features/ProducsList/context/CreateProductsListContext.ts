@@ -1,11 +1,12 @@
-import { createContext } from 'react';
-import { CreateProductsState } from "../reducer/ProductsListReducer";
-
+import { createContext } from "react";
+import { CreateProductsState } from "../reducer/productsListReducer";
 
 interface CreateProductContext {
-    state: CreateProductsState;
-    actions: {
-        getAllProducts: () => Promise<void>
-    }
+  state: CreateProductsState;
+  actions: {
+    getAllProducts: () => Promise<void>;
+  };
 }
-export const ProductsListContext = createContext<CreateProductContext | undefined>(undefined);
+export const ProductsListContext = createContext<
+  CreateProductContext | undefined
+>(undefined);

@@ -10,7 +10,7 @@ import {
   CreateProductReducer,
   initialState,
   productsListReducer,
-} from "../reducer/ProductsListReducer";
+} from "../reducer/productsListReducer";
 import { ProductsListContext } from "./CreateProductsListContext";
 
 export const ProductListProvider: FC<PropsWithChildren> = ({ children }) => {

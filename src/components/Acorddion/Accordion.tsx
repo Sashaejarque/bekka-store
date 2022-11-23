@@ -1,3 +1,4 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
@@ -5,7 +6,6 @@ import {
   Typography,
 } from "@mui/material";
 import React, { FC, useState } from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 interface Props {
   children: React.ReactNode;

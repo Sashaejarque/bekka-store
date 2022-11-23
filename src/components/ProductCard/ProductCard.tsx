@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
   Card,
@@ -16,39 +15,18 @@ import Counter from "../Counter/Counter";
 interface Props {
   item: Products;
 }
-const style = {
-  containerImage: {
-    width: "100%",
-    height: 200,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    "&:hover": {
-      backgroundColor: "orange",
-    },
-    marginLeft: 2,
-  },
-  cardContainer: {
-    width: 300,
-    minHeight: 400,
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "column",
-  },
-};
-const ProductCard: FC<Props> = ({item}) => {
+
+const ProductCard: FC<Props> = ({ item }) => {
   const {
-    state: { items }, 
-    actions: { 
-      addProductToCart, 
-      increaseOneProductToCart, 
+    state: { items },
+    actions: {
+      addProductToCart,
+      increaseOneProductToCart,
       decrementOneProductToCart,
       getItemQuantity,
       removeItem,
-      resetItemQuantity
-    } 
+      resetItemQuantity,
+    },
   } = useShoppingCart();
   const [quantity, setQuantity] = useState(getItemQuantity(item));
   const [showCounter, setShowCounter] = useState(quantity > 0);
@@ -61,25 +39,25 @@ const ProductCard: FC<Props> = ({item}) => {
     if (getItemQuantity(item) > 0) {
       setQuantity(quantity - 1);
       decrementOneProductToCart(item);
-    } 
-    if(quantity === 1 ) {
+    }
+    if (quantity === 1) {
       removeItem(item);
       setShowCounter(false);
     }
   };
 
   const handleAddProductToCart = () => {
-    if(quantity > 1) {
+    if (quantity > 1) {
       resetItemQuantity(item);
     }
-      addProductToCart(item);
-      setQuantity(1);
-      setShowCounter(true);
-  }
+    addProductToCart(item);
+    setQuantity(1);
+    setShowCounter(true);
+  };
 
   useEffect(() => {
     setQuantity(getItemQuantity(item));
-  }, [items]);
+  }, [items, getItemQuantity, item]);
 
   return (
     <Card sx={style.cardContainer}>
@@ -118,6 +96,29 @@ const ProductCard: FC<Props> = ({item}) => {
       </CardActions>
     </Card>
   );
+};
+
+const style = {
+  containerImage: {
+    width: "100%",
+    height: 200,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    "&:hover": {
+      backgroundColor: "orange",
+    },
+    marginLeft: 2,
+  },
+  cardContainer: {
+    width: 300,
+    minHeight: 400,
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "column",
+  },
 };
 
 export default ProductCard;

@@ -1,19 +1,21 @@
 import Products from "../../../models/Product";
 
-
 export interface AddProductsToState {
-    type: "ADD_PRODUCTS_TO_STATE";
-    payload: Products[];
+  type: "ADD_PRODUCTS_TO_STATE";
+  payload: Products[];
 }
 
 interface SetLoadingFalse {
-    type: "SET_LOADING_FALSE";
-  }
-  
-  interface SetLoadingTrue {
-    type: "SET_LOADING_TRUE";
-  }
+  type: "SET_LOADING_FALSE";
+}
 
-  type ProductsListActions = AddProductsToState | SetLoadingFalse | SetLoadingTrue;
+interface SetLoadingTrue {
+  type: "SET_LOADING_TRUE";
+}
 
-  export default ProductsListActions;
+type ProductsListActions =
+  | AddProductsToState
+  | SetLoadingFalse
+  | SetLoadingTrue;
+
+export default ProductsListActions;

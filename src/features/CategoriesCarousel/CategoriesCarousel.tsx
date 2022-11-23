@@ -12,11 +12,11 @@ const CategoriesCarousel = () => {
       try {
         const categories = await getCategories();
         setCategoriesList(categories?.data);
-    } catch (error) {
+      } catch (error) {
         console.error(error);
-    } finally {
+      } finally {
         setLoading(false);
-    }
+      }
     })();
   }, []);
 
@@ -29,7 +29,7 @@ const CategoriesCarousel = () => {
       </Grid>
       {loading ? (
         <Grid container justifyContent="center" alignItems="center" mt={4}>
-          <CircularProgress />
+          <CircularProgress sx={{ marginLeft: 4, marginTop: 10 }} />
         </Grid>
       ) : (
         <Grid container item xs={12} justifyContent="center">

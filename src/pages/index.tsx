@@ -12,6 +12,7 @@ const IndexPage = () => {
   useEffect(() => {
     getItemsFromLocalStorage();
   }, [getItemsFromLocalStorage]);
+
   return (
     <Layout>
       <CategoriesCarousel />

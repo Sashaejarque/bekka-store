@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { FC, useEffect, useMemo, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import {
   Button,
@@ -10,6 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import useResponsiveScreen from "../../hooks/useResponsiveScreen";
 import CardCart from "../../components/CardCart/CardCart";
 import { useShoppingCart } from "./context/ShoppingCartProvider";
@@ -19,25 +18,11 @@ interface Props {
   open: boolean;
   onClose: () => void;
 }
-const styles = {
-  title: {
-    paddingLeft: 1.3,
-  },
-  divider: {
-    width: "100%",
-    marginTop: 2,
-  },
-  button: {
-    width: "90%",
-    backgroundColor: "black",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "orange",
-    },
-  },
-};
+
 const ShoppingCart: FC<Props> = ({ open, onClose }) => {
-  const { state: { items} } = useShoppingCart();
+  const {
+    state: { items },
+  } = useShoppingCart();
   const [inputDiscount, setInputDiscount] = useState("");
   const [isDiscountApplied, setIsDiscountApplied] = useState(0);
   const [total, setTotal] = useState(0);
@@ -49,7 +34,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
   );
   const responsiveHeight = useMemo(() => height, [height]);
 
-  const reacalculateTotal = () => {
+  const reacalculateTotal = useCallback(() => {
     let totalCart = items.reduce((acc, item) => {
       if (item.quantity != 0) {
         return acc + item.product.price * item.quantity;
@@ -68,10 +53,11 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
     }
 
     return setTotal(totalCart);
-  };
+  }, [items, isDiscountApplied]);
+
   useEffect(() => {
     reacalculateTotal();
-  }, [total, isDiscountApplied, items]);
+  }, [total, isDiscountApplied, items, reacalculateTotal]);
 
   const handleDiscount = () => {
     if (inputDiscount === "DISC10") {
@@ -231,6 +217,24 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
       </div>
     </Drawer>
   );
+};
+
+const styles = {
+  title: {
+    paddingLeft: 1.3,
+  },
+  divider: {
+    width: "100%",
+    marginTop: 2,
+  },
+  button: {
+    width: "90%",
+    backgroundColor: "black",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "orange",
+    },
+  },
 };
 
 export default ShoppingCart;

@@ -20,19 +20,6 @@ interface Props {
   categoryName: string;
 }
 
-const styles = {
-  title: {
-    fontSize: 24,
-    fontWeight: 600,
-  },
-  button: {
-    width: 250,
-    height: 40,
-    backgroundColor: "black",
-    color: "white",
-  },
-};
-
 const CategoryCard: FC<Props> = ({ categoryName }) => {
   const textFormatted = `${categoryName[0].toUpperCase()}${categoryName.slice(
     1
@@ -87,6 +74,19 @@ const CategoryCard: FC<Props> = ({ categoryName }) => {
       </CardContent>
     </Card>
   );
+};
+
+const styles = {
+  title: {
+    fontSize: 24,
+    fontWeight: 600,
+  },
+  button: {
+    width: 250,
+    height: 40,
+    backgroundColor: "black",
+    color: "white",
+  },
 };
 
 export default CategoryCard;

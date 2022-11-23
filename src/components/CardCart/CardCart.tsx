@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { Box, Card, Grid, IconButton, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 import React, { FC } from "react";
 import Counter from "../Counter/Counter";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
 import { ShoppingCartItem } from "../../features/ShoppingCart/reducer/shoppingCartReducer";
 
@@ -10,24 +10,18 @@ interface Props {
   item: ShoppingCartItem;
 }
 
-const style = {
-  title: {
-    fontSize: 12,
-  },
-  icon: {
-    display: "flex",
-    alignItems: "center",
-    width: 18,
-    height: 17,
-    marginRigth: 1,
-  },
-};
-
 const CardCart: FC<Props> = ({ item }) => {
-  const { actions: { increaseOneProductToCart, decrementOneProductToCart, removeItem, getItemQuantity } } = useShoppingCart();
+  const {
+    actions: {
+      increaseOneProductToCart,
+      decrementOneProductToCart,
+      removeItem,
+      getItemQuantity,
+    },
+  } = useShoppingCart();
 
   const handleRemove = () => {
-    if(getItemQuantity(item.product) > 0) {
+    if (getItemQuantity(item.product) > 0) {
       decrementOneProductToCart(item.product);
     }
     if (getItemQuantity(item.product) === 1) {
@@ -71,6 +65,19 @@ const CardCart: FC<Props> = ({ item }) => {
       </Card>
     </Box>
   );
+};
+
+const style = {
+  title: {
+    fontSize: 12,
+  },
+  icon: {
+    display: "flex",
+    alignItems: "center",
+    width: 18,
+    height: 17,
+    marginRigth: 1,
+  },
 };
 
 export default CardCart;
