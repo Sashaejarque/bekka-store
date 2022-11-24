@@ -1,20 +1,23 @@
 import React, { FC, useMemo } from "react";
 import Carousel from "nuka-carousel/lib/carousel";
 import CategoryCard from "../CategoryCard/CategoryCard";
-import useResponsiveScreen from "../../hooks/useResponsiveScreen";
+
 
 interface Props {
   data: string[];
 }
 const CategoryCarousel: FC<Props> = ({ data }) => {
-  const { width } = useResponsiveScreen();
-  const responsiveWidth = useMemo(() => width * 0.8, [width]);
+
 
   return (
     <Carousel
+      autoplay
+      autoplayInterval={5000}
+      pauseOnHover
+      speed={1000}
+      wrapAround
       style={{
         height: 440,
-        width: responsiveWidth,
         borderStyle: "solid",
         borderWidth: 1,
       }}

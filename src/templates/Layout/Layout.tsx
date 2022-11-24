@@ -6,7 +6,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Box sx={styles.container}>
       <Header />
-      <Grid container spacing={6} mt={0}>
+      <Grid container spacing={6} mt={0} paddingX={4}>
         {children}
       </Grid>
     </Box>

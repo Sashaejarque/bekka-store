@@ -23,9 +23,9 @@ const ProductsList = () => {
 
   return (
     <>
-      <Grid container item xs={12} ml={4}>
+      <Grid container item xs={12}>
         <Typography sx={{ fontWeight: 600, fontSize: 40 }}>
-          All products
+          Our products
         </Typography>
       </Grid>
       <Grid
@@ -34,9 +34,6 @@ const ProductsList = () => {
         xs={12}
         justifyContent="center"
         alignItems="center"
-        spacing={2}
-        ml={2}
-        mr={2}
       >
         <SearchAndFilter
           selectValue={category}

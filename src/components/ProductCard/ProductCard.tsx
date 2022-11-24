@@ -93,7 +93,6 @@ const ProductCard: FC<Props> = ({ item }) => {
           )}
           <Button
             sx={[style.button, { backgroundColor: "black" }]}
-            size="small"
             onClick={() => handleAddProductToCart()}
             data-testid="addButtonProduct"
           >
@@ -115,7 +114,9 @@ const style = {
   },
   button: {
     "&:hover": {
-      backgroundColor: "orange",
+      backgroundColor: "black",
+      transform: "scale(1.1)",
+      transition: "all 0.1s"
     },
     marginLeft: 2,
   },

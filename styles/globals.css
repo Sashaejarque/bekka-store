@@ -14,4 +14,6 @@ a {
 * {
   box-sizing: border-box;
 }
-
+.slider-container {
+  width: 100%;
+}

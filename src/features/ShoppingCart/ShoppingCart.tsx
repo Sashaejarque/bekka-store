@@ -36,7 +36,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
   const responsiveHeight = useMemo(() => height, [height]);
 
   const totalRecalculated = useCallback(() => {
-    const newTotal = recalculateTotal(items, isDiscountApplied);
+    const newTotal: number = recalculateTotal(items, isDiscountApplied);
     setTotal(newTotal);
   }, [items, isDiscountApplied]);
 

@@ -23,7 +23,7 @@ const SearchAndFilter: FC<SearchAndFilterProps> = ({
   onChangeSearchInput,
 }) => {
   return (
-    <>
+    <Grid container spacing={1}>
       <Grid item xs={12} md={9}>
         <TextField
           id="input-with-icon-textfield"
@@ -59,7 +59,7 @@ const SearchAndFilter: FC<SearchAndFilterProps> = ({
           </Select>
         </FormControl>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Badge, Grid } from "@mui/material";
+import { Badge, Grid, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import React, { useMemo, useState } from "react";
@@ -12,8 +12,6 @@ const Header = () => {
   const {
     state: { items },
   } = useShoppingCart();
-  const { width } = useResponsiveScreen();
-  const responsiveWidth = useMemo(() => width * 0.02, [width]);
 
   const toggleDrawer = () => {
     setDrawer(!drawer);
@@ -21,71 +19,50 @@ const Header = () => {
   const goToHome = () => {
     window.location.href = "/";
   };
-  const widthForIcon = useMemo(() => {
-    if (width < 600) {
-      return 2;
-    }
-    return 6;
-  }, [width]);
   const totalItemsCart = useMemo(() => {
     return items.reduce((acc, item) => acc + item.quantity, 0);
   }, [items]);
   return (
-    <>
-      <Grid
-        container
-        sx={styles.container}
-        justifyContent="center"
-        alignItems="center"
-        data-testid="header"
-      >
-        <Grid
-          container
-          item
-          xs={10}
-          alignItems="center"
-          justifyContent="center"
-          sx={{ paddingLeft: responsiveWidth }}
-        >
-          <img
-            src="https://i0.wp.com/firstclose.com/wp-content/uploads/2022/03/cropped-firstclose-logo-header.png?fit=504%2C115&ssl=1"
-            alt="FirstClose"
-            style={styles.img}
-            onClick={() => goToHome()}
-            data-testid="logo"
-          />
-        </Grid>
-        <Grid
-          container
-          item
-          xs={2}
-          alignItems="center"
-          justifyContent="flex-end"
-          paddingRight={widthForIcon}
-          mt={1}
-        >
-          <Badge badgeContent={totalItemsCart} color="error">
-            <IconButton
-              aria-label="add to shopping cart"
-              onClick={() => toggleDrawer()}
-              data-testid="shopping-cart-button"
-            >
-              <ShoppingCartIcon color="primary" />
-            </IconButton>
-          </Badge>
-        </Grid>
+    <Stack
+      sx={styles.container}
+      flexDirection="row"
+      alignItems="center"
+      justifyContent="space-between"
+      paddingX={4}
+    >
+      <div />
+      <Grid>
+        <img
+          src="https://i0.wp.com/firstclose.com/wp-content/uploads/2022/03/cropped-firstclose-logo-header.png?fit=504%2C115&ssl=1"
+          alt="FirstClose"
+          style={styles.img}
+          onClick={() => goToHome()}
+          data-testid="logo"
+        />
+      </Grid>
+      <Grid>
+        <Badge badgeContent={totalItemsCart} color="error">
+          <IconButton
+            aria-label="add to shopping cart"
+            onClick={() => toggleDrawer()}
+            data-testid="shopping-cart-button"
+          >
+            <ShoppingCartIcon color="primary" />
+          </IconButton>
+        </Badge>
       </Grid>
       <ShoppingCart
         open={drawer}
         onClose={toggleDrawer}
         data-testid="shopping-cart"
       />
-    </>
+    </Stack>
   );
 };
 
 const styles = {
   container: {
+    width: "100%",
     height: 80,
     backgroundColor: "black",
     position: "fixed",

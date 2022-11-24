@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_URL = 'https://fakestoreapi.com';
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const fetchJeweleryProducts = async () => {
   try {
