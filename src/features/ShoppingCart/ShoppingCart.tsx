@@ -13,6 +13,7 @@ import useResponsiveScreen from "../../hooks/useResponsiveScreen";
 import CardCart from "../../components/CardCart/CardCart";
 import { useShoppingCart } from "./context/ShoppingCartProvider";
 import AccordionComponent from "../../components/Acorddion/Accordion";
+import { recalculateTotal } from "./utils/recalculateTotal";
 
 interface Props {
   open: boolean;
@@ -34,30 +35,14 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
   );
   const responsiveHeight = useMemo(() => height, [height]);
 
-  const reacalculateTotal = useCallback(() => {
-    let totalCart = items.reduce((acc, item) => {
-      if (item.quantity != 0) {
-        return acc + item.product.price * item.quantity;
-      } else {
-        return acc + item.product.price;
-      }
-    }, 0);
-    if (isDiscountApplied === 10) {
-      totalCart = totalCart - totalCart * 0.1;
-    }
-    if (isDiscountApplied === 20) {
-      totalCart = totalCart - totalCart * 0.2;
-    }
-    if (isDiscountApplied === 30) {
-      totalCart = totalCart - totalCart * 0.3;
-    }
-
-    return setTotal(totalCart);
+  const totalRecalculated = useCallback(() => {
+    const newTotal = recalculateTotal(items, isDiscountApplied);
+    setTotal(newTotal);
   }, [items, isDiscountApplied]);
 
   useEffect(() => {
-    reacalculateTotal();
-  }, [total, isDiscountApplied, items, reacalculateTotal]);
+    totalRecalculated();
+  }, [total, isDiscountApplied, items, totalRecalculated]);
 
   const handleDiscount = () => {
     if (inputDiscount === "DISC10") {

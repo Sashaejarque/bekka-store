@@ -1,7 +1,7 @@
 import { CircularProgress, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategoryCarousel from "../../components/CategoryCarousel/CategoryCarousel";
-import { getCategories } from "../../services/categories";
+import { fetchCategories } from "../../services/categories";
 
 const CategoriesCarousel = () => {
   const [categoriesList, setCategoriesList] = useState([]);
@@ -10,7 +10,7 @@ const CategoriesCarousel = () => {
   useEffect(() => {
     (async () => {
       try {
-        const categories = await getCategories();
+        const categories = await fetchCategories();
         setCategoriesList(categories?.data);
       } catch (error) {
         console.error(error);

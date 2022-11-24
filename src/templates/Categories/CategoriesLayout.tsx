@@ -39,6 +39,7 @@ const CategoriesLayout: FC<CategoriesLayoutProps> = ({
             ),
           }}
           variant="outlined"
+          data-testid="search"
         />
       </Grid>
       {isLoading ? (

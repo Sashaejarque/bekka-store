@@ -37,6 +37,7 @@ const Header = () => {
         sx={styles.container}
         justifyContent="center"
         alignItems="center"
+        data-testid="header"
       >
         <Grid
           container
@@ -74,7 +75,11 @@ const Header = () => {
           </Badge>
         </Grid>
       </Grid>
-      <ShoppingCart open={drawer} onClose={toggleDrawer} data-testid="shopping-cart" />
+      <ShoppingCart
+        open={drawer}
+        onClose={toggleDrawer}
+        data-testid="shopping-cart"
+      />
     </>
   );
 };

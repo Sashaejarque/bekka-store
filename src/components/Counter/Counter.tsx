@@ -12,11 +12,19 @@ interface Props {
 const Counter: FC<Props> = ({ count, onClickRemove, onClickAdd }) => {
   return (
     <Box sx={styles.container}>
-      <IconButton onClick={onClickRemove} sx={styles.icon} data-testid="decrease-button">
+      <IconButton
+        onClick={onClickRemove}
+        sx={styles.icon}
+        data-testid="decrease-button"
+      >
         <RemoveIcon sx={styles.icon} />
       </IconButton>
       <Typography data-testid="counter">{count}</Typography>
-      <IconButton onClick={onClickAdd} sx={styles.icon} data-testid="add-button">
+      <IconButton
+        onClick={onClickAdd}
+        sx={styles.icon}
+        data-testid="add-button"
+      >
         <AddIcon sx={styles.icon} />
       </IconButton>
     </Box>

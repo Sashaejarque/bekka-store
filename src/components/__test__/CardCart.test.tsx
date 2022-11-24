@@ -42,4 +42,13 @@ describe("CardCart", () => {
     ).toBeTruthy();
     expect(getByText("$109.95")).toBeTruthy();
   });
+
+  it("should render the image", () => {
+    const { getByTestId } = render(
+      <ShoppingCartProvider>
+        <CardCart item={mockItem} />
+      </ShoppingCartProvider>
+    );
+    expect(getByTestId("image-cardcart")).toBeTruthy();
+  });
 });

@@ -1,5 +1,4 @@
 import axios from "axios";
-import Products from "../models/Product";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

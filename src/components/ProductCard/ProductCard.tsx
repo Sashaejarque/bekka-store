@@ -60,7 +60,7 @@ const ProductCard: FC<Props> = ({ item }) => {
   }, [items, getItemQuantity, item]);
 
   return (
-    <Card sx={style.cardContainer}>
+    <Card sx={style.cardContainer} data-testid="product-card">
       <div style={style.containerImage}>
         <CardMedia
           component="img"
@@ -71,8 +71,12 @@ const ProductCard: FC<Props> = ({ item }) => {
         />
       </div>
       <CardContent>
-        <Typography textAlign="center" data-testid="titleProduct">{item.title}</Typography>
-        <Typography textAlign="center" data-testid="priceProduct">${item.price}</Typography>
+        <Typography textAlign="center" data-testid="titleProduct">
+          {item.title}
+        </Typography>
+        <Typography textAlign="center" data-testid="priceProduct">
+          ${item.price}
+        </Typography>
       </CardContent>
       <CardActions>
         <Grid container justifyContent="center" paddingBottom={2}>

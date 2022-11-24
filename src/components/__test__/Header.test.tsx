@@ -17,23 +17,23 @@ describe("Header", () => {
 
   it("should render the logo", () => {
     const { getByTestId } = render(
-        <ShoppingCartProvider>
-          <Header />
-        </ShoppingCartProvider>
-      );
+      <ShoppingCartProvider>
+        <Header />
+      </ShoppingCartProvider>
+    );
     const logo = getByTestId("logo");
     expect(logo).toBeTruthy();
   });
 
   it("should render the shopping cart", () => {
     const { getByTestId } = render(
-        <ShoppingCartProvider>
-          <Header />
-        </ShoppingCartProvider>
-      );
+      <ShoppingCartProvider>
+        <Header />
+      </ShoppingCartProvider>
+    );
     const button = getByTestId("shopping-cart-button");
     fireEvent.click(button);
-    
+
     const shoppingCart = getByTestId("shopping-cart");
     expect(shoppingCart).toBeTruthy();
   });

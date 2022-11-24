@@ -42,6 +42,12 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Run test (71% coverage)
+
+```bash
+npm run test-coverage
+
+
 
 ## Information for the use
 
