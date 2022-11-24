@@ -13,8 +13,8 @@ describe("CategoryCarousel", () => {
   });
 
   it("should render the category name", () => {
-    const { getByText } = render(<CategoryCarousel data={mockData} />);
-    expect(getByText("Electronics")).toBeTruthy();
-    expect(getByText("Jewelery")).toBeTruthy();
+    const { getAllByText } = render(<CategoryCarousel data={mockData} />);
+    expect(getAllByText("Electronics")).toBeTruthy();
+    expect(getAllByText("Jewelery")).toBeTruthy();
   });
 });

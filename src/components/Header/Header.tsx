@@ -29,6 +29,7 @@ const Header = () => {
       alignItems="center"
       justifyContent="space-between"
       paddingX={4}
+      data-testid="header"
     >
       <div />
       <Grid>
