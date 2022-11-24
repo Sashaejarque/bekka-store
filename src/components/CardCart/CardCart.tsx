@@ -34,7 +34,7 @@ const CardCart: FC<Props> = ({ item }) => {
         <Grid container item xs={2} justifyContent="center" alignItems="center">
           <img
             alt="prueba"
-            style={{ maxWidth: 75, maxHeight: 60 }}
+            style={{ maxWidth: '90%', maxHeight: "95%" }}
             src={item.product.image}
             data-testid="image-cardcart"
           />
