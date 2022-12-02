@@ -116,7 +116,8 @@ const style = {
     "&:hover": {
       backgroundColor: "black",
       transform: "scale(1.1)",
-      transition: "all 0.1s"
+      transition: "all 0.1s",
+      boxShadow: "0 0 0.2rem 0.2rem rgba(191, 187, 189, 0.37)",
     },
     marginLeft: 2,
   },

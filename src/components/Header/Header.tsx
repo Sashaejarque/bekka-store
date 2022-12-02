@@ -33,13 +33,14 @@ const Header = () => {
     >
       <div />
       <Grid>
-        <img
+        {/* <img
           src="https://i0.wp.com/firstclose.com/wp-content/uploads/2022/03/cropped-firstclose-logo-header.png?fit=504%2C115&ssl=1"
           alt="FirstClose"
           style={styles.img}
           onClick={() => goToHome()}
           data-testid="logo"
-        />
+        /> */}
+        <h2 style={{ color: 'white', cursor: "pointer"}} onClick={() => goToHome()}>LOGO</h2>
       </Grid>
       <Grid>
         <Badge badgeContent={totalItemsCart} color="error">
