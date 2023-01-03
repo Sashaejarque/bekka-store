@@ -4,21 +4,9 @@ import CategoryCarousel from "../../components/CategoryCarousel/CategoryCarousel
 import { fetchCategories } from "../../services/categories";
 
 const CategoriesCarousel = () => {
+  // TODO: Agregar endpoint para carrousel de categorias
   const [categoriesList, setCategoriesList] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const categories = await fetchCategories();
-        setCategoriesList(categories?.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
 
   return (
     <>

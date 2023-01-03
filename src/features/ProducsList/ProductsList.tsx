@@ -36,12 +36,10 @@ const ProductsList = () => {
         alignItems="center"
       >
         <SearchAndFilter
-          selectValue={category}
-          onChangeSelectCategory={(e) => setCategory(e.target.value)}
           onChangeSearchInput={(e) => setFilter(e.target.value)}
         />
       </Grid>
-      <Grid container item xs={12} spacing={2}>
+      <Grid container item xs={12} spacing={4} mt={2}>
         {loading ? (
           <Grid container justifyContent="center" alignItems="center">
             <CircularProgress />

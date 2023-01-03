@@ -65,14 +65,14 @@ const ProductCard: FC<Props> = ({ item }) => {
         <CardMedia
           component="img"
           image={item.image}
-          alt={item.title}
+          alt={item.name}
           sx={{ maxHeight: 200, objectFit: "contain", maxWidth: 300 }}
           data-testid="image"
         />
       </div>
       <CardContent>
         <Typography textAlign="center" data-testid="titleProduct">
-          {item.title}
+          {item.name}
         </Typography>
         <Typography textAlign="center" data-testid="priceProduct">
           ${item.price}

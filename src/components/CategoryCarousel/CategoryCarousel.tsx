@@ -1,12 +1,10 @@
 import React, { FC, useMemo } from "react";
 import Carousel from "nuka-carousel/lib/carousel";
-import CategoryCard from "../CategoryCard/CategoryCard";
-
 
 interface Props {
   data: string[];
 }
-const CategoryCarousel: FC<Props> = ({ data }) => {
+const CategoryCarousel: FC<Props> = () => {
 
 
   return (
@@ -22,13 +20,7 @@ const CategoryCarousel: FC<Props> = ({ data }) => {
         borderWidth: 1,
       }}
     >
-      {data.map((category) => (
-        <CategoryCard
-          categoryName={category}
-          key={category}
-          data-testid={`${category}-id`}
-        />
-      ))}
+      <h1>aca va la data</h1>
     </Carousel>
   );
 };
