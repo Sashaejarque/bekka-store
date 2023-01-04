@@ -28,15 +28,19 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     if (response) {
       const { data } = response;
       const { jwt } = data;
-
+      sessionStorage.setItem('user-token', jwt);
       dispatch({ type: "SIGN_IN", payload: jwt });
     }
   };
 
+
   return (
     <AuthContext.Provider
       value={{
-        state,
+        state: {
+          isLogged: state.isLogged,
+          jwt: state.jwt,
+        },
         actions: {
           signIn,
         },

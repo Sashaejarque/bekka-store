@@ -2,6 +2,7 @@ import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import InputPassword from "../../components/InputPassword/InputPassword";
 import { useAuth } from "./context/AuthProvider";
+import Router from "next/router";
 
 const LoginUI = () => {
   const [formState, setFormState] = useState({
@@ -13,8 +14,14 @@ const LoginUI = () => {
   } = useAuth();
 
   const handleSubmit = () => {
-    signIn(formState.email, formState.password);
-  }
+    try {
+      signIn(formState.email, formState.password);
+     //TODO: Handle response. Si es incorrecto el passwor o user que no haga el redirect
+      Router.push('/admin')
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box
@@ -58,7 +65,7 @@ const LoginUI = () => {
           justifyContent="center"
         >
           <InputPassword
-            onChange={(e: { target: { value: any; }; }) =>
+            onChange={(e: { target: { value: any } }) =>
               setFormState({ ...formState, password: e.target.value })
             }
             state={formState.password}
