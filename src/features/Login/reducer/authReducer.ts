@@ -1,12 +1,10 @@
+import AuthActions from "../actions/AuthActions";
+
 interface AuthState {
     isLogged: boolean;
     jwt: string;
 }
 
-interface AuthActions {
-    type: 'SIGN_IN';
-    payload: string;
-}
 
 export function authReducer (state: AuthState, action: AuthActions) {
     switch (action.type) {
@@ -15,6 +13,12 @@ export function authReducer (state: AuthState, action: AuthActions) {
                 ...state,
                 isLogged: true,
                 jwt: action.payload
+            };
+        case 'SIGN_OUT':
+            return {
+                ...state,
+                isLogged: false,
+                jwt: ''
             };
     }
 };

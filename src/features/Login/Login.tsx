@@ -17,7 +17,7 @@ const LoginUI = () => {
     try {
       signIn(formState.email, formState.password);
      //TODO: Handle response. Si es incorrecto el passwor o user que no haga el redirect
-      Router.push('/admin')
+      Router.push('/');
     } catch (error) {
       console.log(error);
     }

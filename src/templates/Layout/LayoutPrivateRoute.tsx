@@ -1,27 +1,37 @@
 import React, { FC, PropsWithChildren, useEffect, useState } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import Header from "../../components/Header/Header";
-import Router from 'next/router'
+import Router from "next/router";
+import { useAuth } from "../../features/Login/context/AuthProvider";
 
 const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [logged, setLogged] = useState(false);
+  const { state: { isLogged }} = useAuth();
 
   useEffect(() => {
     const token = sessionStorage.getItem("user-token");
-    if (!token) {
-      setTimeout(() => {
-        Router.push('/admin/login')
-      }, 2000);
+    if (!token && !isLogged) {
+        Router.push("/admin/login");
     } else {
-      setIsLogged(true);
+      setLogged(true);
     }
-  }, []);
+    setLoading(false);
+  }, [isLogged]);
 
   return (
     <Box sx={styles.container}>
       <Header />
       <Grid container mt={12} paddingX={4}>
-        {isLogged ? children : <h1>Not authorized</h1>}
+        {loading ? (
+          <Grid container item xs={12} justifyContent="center">
+            <CircularProgress />
+          </Grid>
+        ) : logged ? (
+          children
+        ) : (
+          <h1>Not authorized</h1>
+        )}
       </Grid>
     </Box>
   );

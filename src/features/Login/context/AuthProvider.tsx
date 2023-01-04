@@ -33,6 +33,11 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     }
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('user-token');
+    dispatch({ type: "SIGN_OUT" });
+  };
+
 
   return (
     <AuthContext.Provider
@@ -43,6 +48,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         },
         actions: {
           signIn,
+          signOut: handleLogout,
         },
       }}
     >

@@ -9,6 +9,7 @@ export interface AuthContext {
   state: AuthState;
   actions: {
     signIn: (email: string, password: string) => void;
+    signOut: () => void;
   };
 }
 
