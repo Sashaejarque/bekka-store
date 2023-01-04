@@ -1,6 +1,5 @@
-import { Grid, Typography } from "@mui/material";
 import React from "react";
-import LoginUI from "../../components/LoginUI/LoginUI";
+import LoginUI from "../../features/Login/Login";
 import { Layout } from "../../templates";
 
 const Login = () => {
