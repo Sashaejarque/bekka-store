@@ -7,11 +7,7 @@ export const filteredProducts = (
 ) => {
   const productsFilterBySearch = products.filter((product) => {
     if (filter === "") return true;
-    return product.title.toLowerCase().includes(filter.toLowerCase());
+    return product.name.toLowerCase().includes(filter.toLowerCase());
   });
-  const productFilterByCategory = productsFilterBySearch.filter((product) => {
-    if (category === "") return true;
-    return product.category === category;
-  });
-  return productFilterByCategory;
+  return productsFilterBySearch;
 };

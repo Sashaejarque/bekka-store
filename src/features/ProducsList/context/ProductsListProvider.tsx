@@ -22,8 +22,8 @@ export const ProductListProvider: FC<PropsWithChildren> = ({ children }) => {
   const getAllProducts = useCallback(async () => {
     try {
       dispatch({ type: "SET_LOADING_TRUE" });
-      const categories = await fetchAllProducts();
-      dispatch({ type: "ADD_PRODUCTS_TO_STATE", payload: categories?.data });
+      const products = await fetchAllProducts();
+      dispatch({ type: "ADD_PRODUCTS_TO_STATE", payload: products?.data });
       dispatch({ type: "SET_LOADING_FALSE" });
     } catch (error) {
       console.error(error);

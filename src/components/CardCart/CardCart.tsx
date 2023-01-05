@@ -48,7 +48,7 @@ const CardCart: FC<Props> = ({ item }) => {
           flexDirection="column"
           paddingLeft={3}
         >
-          <Typography sx={style.title}>{item.product.title}</Typography>
+          <Typography sx={style.title}>{item.product.name}</Typography>
           <Counter
             count={item.quantity}
             onClickAdd={() => increaseOneProductToCart(item.product)}
