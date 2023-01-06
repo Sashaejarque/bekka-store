@@ -17,7 +17,7 @@ const InputPassword: FC<InputPasswordProps> = ({
               Password
             </InputLabel>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id="password"
               label="Password"
               type={showPassword ? "text" : "password"}
               value={state}

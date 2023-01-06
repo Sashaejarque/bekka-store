@@ -3,4 +3,5 @@ export default interface Products {
   name: string;
   price: number;
   image: string;
+  stock?: number;
 }

@@ -1,12 +1,13 @@
 import React from "react";
+import AddProduct from "../../../features/AddProduct/AddProduct";
 import LayoutPrivateRoute from "../../../templates/Layout/LayoutPrivateRoute";
 
-const AddProduct = () => {
+const AddProductPage = () => {
   return (
     <LayoutPrivateRoute>
-      <h1>Add Product</h1>
+      <AddProduct />
     </LayoutPrivateRoute>
   );
 };
 
-export default AddProduct;
+export default AddProductPage;
