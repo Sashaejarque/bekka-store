@@ -1,15 +1,40 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { createProduct } from "./services/createProduct";
+import { uploadImage } from "./services/uploadImage";
+
+interface IFormState {
+  name: string;
+  price: number;
+  stock: number;
+  image: File | null;
+}
 
 const AddProduct = () => {
-  const [formState, setFormState] = useState({
+  const [formState, setFormState] = useState<IFormState>({
     name: "",
-    price: "",
-    stock: "",
-    image: "",
+    price: 0,
+    stock: 0,
+    image: null,
   });
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async () => {
+    try {
+      const { name, price, stock, image } = formState;
+
+      if (!image) return;
+      const imageUploaded: string = await uploadImage(image);
+      const product = {
+        name,
+        price,
+        stock,
+        image: imageUploaded,
+      };
+      const postProduct = await createProduct(product);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Box
@@ -57,7 +82,7 @@ const AddProduct = () => {
             label="Price"
             type="number"
             onChange={(e) =>
-              setFormState({ ...formState, price: e.target.value })
+              setFormState({ ...formState, price: Number(e.target.value) })
             }
             sx={{ width: "100%", margin: 2 }}
           />
@@ -74,7 +99,7 @@ const AddProduct = () => {
             label="Cantidad de stock"
             type="number"
             onChange={(e) =>
-              setFormState({ ...formState, stock: e.target.value })
+              setFormState({ ...formState, stock: Number(e.target.value) })
             }
             sx={{ width: "100%", margin: 2 }}
           />
@@ -90,6 +115,11 @@ const AddProduct = () => {
             name="upload-photo"
             type="file"
             sx={{ width: "100%", margin: 2 }}
+            onChange={async (e) => {
+              const target = e.target as HTMLInputElement;
+              const file: File = (target.files as FileList)[0];
+              setFormState({ ...formState, image: file });
+            }}
           />
         </Grid>
 
@@ -103,7 +133,7 @@ const AddProduct = () => {
           <Button
             variant="contained"
             sx={{ width: "100%", margin: 2 }}
-            onClick={() => console.log("FUNCANDO", formState)}
+            onClick={() => handleSubmit()}
           >
             Agregar producto
           </Button>
