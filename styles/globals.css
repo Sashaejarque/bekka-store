@@ -17,3 +17,7 @@ a {
 .slider-container {
   width: 100%;
 }
+@font-face {
+  font-family: TenorSans;
+  src: url("../public/fonts/TenorSans-Regular.ttf");
+}
