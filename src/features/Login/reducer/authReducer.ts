@@ -3,6 +3,7 @@ import AuthActions from "../actions/AuthActions";
 interface AuthState {
     isLogged: boolean;
     jwt: string;
+    loading: boolean;
 }
 
 
@@ -20,5 +21,15 @@ export function authReducer (state: AuthState, action: AuthActions) {
                 isLogged: false,
                 jwt: ''
             };
+        case 'LOADING_TRUE':
+            return {
+                ...state,
+                loading: true
+            }
+        case 'LOADING_FALSE':
+            return {
+                ...state,
+                loading: false
+            }
     }
 };

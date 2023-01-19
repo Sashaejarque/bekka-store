@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { FC, PropsWithChildren, useEffect, useState } from "react";
-import { Box, CircularProgress, Grid } from "@mui/material";
+import { Box, Button, CircularProgress, Grid } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Router from "next/router";
 import { useAuth } from "../../features/Login/context/AuthProvider";
@@ -7,13 +8,13 @@ import { useAuth } from "../../features/Login/context/AuthProvider";
 const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [logged, setLogged] = useState(false);
-  const { state: { isLogged }} = useAuth();
+  const {
+    state: { isLogged },
+  } = useAuth();
 
   useEffect(() => {
     const token = sessionStorage.getItem("user-token");
-    if (!token && !isLogged) {
-        Router.push("/admin/login");
-    } else {
+    if (token || isLogged) {
       setLogged(true);
     }
     setLoading(false);
@@ -30,7 +31,11 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
         ) : logged ? (
           children
         ) : (
-          <h1>Not authorized</h1>
+          <Grid container justifyContent="center" alignItems="center" flexDirection="column">
+            <h1>Not authorized</h1>
+            <h4>La página a la que estás intentando acceder es un área restringida</h4>
+            <Button onClick={() => Router.push("/")}>Ir al home</Button>
+          </Grid>
         )}
       </Grid>
     </Box>

@@ -3,8 +3,10 @@ import { FC, PropsWithChildren, useContext, useReducer } from "react";
 import { login } from "../../../services/auth";
 import { authReducer } from "../reducer/authReducer";
 import { AuthContext } from "./CreateAuthContext";
+import Router from "next/router";
+import { useToast } from "use-toast-mui";
 
-interface IHttpResponse extends AxiosResponse {
+export interface IHttpResponse extends AxiosResponse {
   data: {
     msg: string;
     jwt: string;
@@ -20,24 +22,44 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     isLogged: false,
     jwt: "",
+    loading: false,
   });
 
+  const toast = useToast();
+
   const signIn = async (email: string, password: string) => {
-    const response: IHttpResponse | undefined = await login(email, password);
-    console.log(response);
-    if (response) {
-      const { data } = response;
-      const { jwt } = data;
-      sessionStorage.setItem('user-token', jwt);
-      dispatch({ type: "SIGN_IN", payload: jwt });
+    if (!email || !password) return toast.error("Todos los campos son obligatorios");
+    if(!email.includes('@')) return toast.error('El email no es válido');
+    if(password.length < 6) return toast.error('La contraseña debe tener al menos 6 caracteres');
+
+    try {
+      dispatch({ type: "LOADING_TRUE" });
+      const response: IHttpResponse | undefined = await login(email, password);
+
+      if (response) {
+        const { data } = response;
+        const { jwt } = data;
+        sessionStorage.setItem("user-token", jwt);
+        dispatch({ type: "SIGN_IN", payload: jwt });
+
+        if (response.status === 200) {
+          toast.success(`Bienvenido ${email}`);
+          Router.push("/");
+        }
+      }
+      if(!response) {
+        toast.error('El usuario o la contraseña son incorrectos');
+      }
+      dispatch({ type: "LOADING_FALSE" });
+    } catch (error) {
+      console.error(error);
     }
   };
 
   const handleLogout = () => {
-    sessionStorage.removeItem('user-token');
+    sessionStorage.removeItem("user-token");
     dispatch({ type: "SIGN_OUT" });
   };
-
 
   return (
     <AuthContext.Provider
@@ -45,6 +67,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         state: {
           isLogged: state.isLogged,
           jwt: state.jwt,
+          loading: state.loading,
         },
         actions: {
           signIn,

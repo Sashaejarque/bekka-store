@@ -4,15 +4,18 @@ import { ShoppingCartProvider } from "../features/ShoppingCart/context/ShoppingC
 import { ProductListProvider } from "../features/ProducsList/context/ProductsListProvider";
 import React from "react";
 import { AuthProvider } from "../features/Login/context/AuthProvider";
+import { ToastProvider } from 'use-toast-mui'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
-      <ShoppingCartProvider>
-        <ProductListProvider>
-          <Component {...pageProps} />
-        </ProductListProvider>
-      </ShoppingCartProvider>
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <ShoppingCartProvider>
+          <ProductListProvider>
+            <Component {...pageProps} />
+          </ProductListProvider>
+        </ShoppingCartProvider>
+      </AuthProvider>
+    </ToastProvider>
   );
 }

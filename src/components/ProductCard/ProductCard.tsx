@@ -66,7 +66,7 @@ const ProductCard: FC<Props> = ({ item }) => {
           component="img"
           image={item.image}
           alt={item.name}
-          sx={{ maxHeight: 200, objectFit: "contain", maxWidth: 300 }}
+          sx={{ maxHeight: 200, objectFit: "contain", maxWidth: 290 }}
           data-testid="image"
         />
       </div>
@@ -111,6 +111,7 @@ const style = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    border: "1px solid #e0e0e0",
   },
   button: {
     "&:hover": {

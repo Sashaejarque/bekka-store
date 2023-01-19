@@ -1,8 +1,9 @@
-import { Box, Button, Grid, TextField, Typography } from "@mui/material";
+import { Box, Button, CircularProgress, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import InputPassword from "../../components/InputPassword/InputPassword";
 import { useAuth } from "./context/AuthProvider";
 import Router from "next/router";
+import ButtonWithLoading from "../../components/Button/ButtonWithLoading";
 
 const LoginUI = () => {
   const [formState, setFormState] = useState({
@@ -11,13 +12,12 @@ const LoginUI = () => {
   });
   const {
     actions: { signIn },
+    state: { loading },
   } = useAuth();
 
   const handleSubmit = () => {
     try {
       signIn(formState.email, formState.password);
-     //TODO: Handle response. Si es incorrecto el passwor o user que no haga el redirect
-      Router.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -80,10 +80,14 @@ const LoginUI = () => {
         >
           <Button
             variant="contained"
-            sx={{ width: "100%", margin: 2 }}
+            sx={{ width: "100%", margin: 2, background: 'black', "&:hover": {
+              background: 'grey',
+            } }}
             onClick={() => handleSubmit()}
           >
-            Login
+            {
+              loading ? <CircularProgress size={24} /> : "Iniciar sesión"
+            }
           </Button>
         </Grid>
       </Grid>

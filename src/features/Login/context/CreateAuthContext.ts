@@ -3,6 +3,7 @@ import { createContext } from "react";
 interface AuthState {
   isLogged: boolean;
   jwt: string;
+  loading: boolean;
 }
 
 export interface AuthContext {

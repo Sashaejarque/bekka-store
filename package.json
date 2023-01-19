@@ -23,7 +23,8 @@
     "next": "13.0.3",
     "nuka-carousel": "^5.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "use-toast-mui": "^0.0.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
