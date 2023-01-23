@@ -78,17 +78,7 @@ const LoginUI = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Button
-            variant="contained"
-            sx={{ width: "100%", margin: 2, background: 'black', "&:hover": {
-              background: 'grey',
-            } }}
-            onClick={() => handleSubmit()}
-          >
-            {
-              loading ? <CircularProgress size={24} /> : "Iniciar sesión"
-            }
-          </Button>
+          <ButtonWithLoading onClick={() => handleSubmit()} title="Iniciar sesión" loading={loading} />
         </Grid>
       </Grid>
     </Box>

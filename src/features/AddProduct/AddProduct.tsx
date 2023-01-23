@@ -1,36 +1,28 @@
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { createProduct } from "./services/createProduct";
+import ButtonWithLoading from "../../components/Button/ButtonWithLoading";
+import { useProducts } from "./context/ProductProvider";
 import { uploadImage } from "./services/uploadImage";
 
 interface IFormState {
   name: string;
-  price: number;
-  stock: number;
+  price: string;
+  stock: string;
   image: File | null;
 }
 
 const AddProduct = () => {
+  const { actions: { createProduct }, state: { loading } } = useProducts();
   const [formState, setFormState] = useState<IFormState>({
     name: "",
-    price: 0,
-    stock: 0,
+    price: "",
+    stock: "",
     image: null,
   });
 
   const handleSubmit = async () => {
     try {
-      const { name, price, stock, image } = formState;
-
-      if (!image) return;
-      const imageUploaded: string = await uploadImage(image);
-      const product = {
-        name,
-        price,
-        stock,
-        image: imageUploaded,
-      };
-      const postProduct = await createProduct(product);
+      createProduct(formState.name, formState.price, formState.stock, formState.image);
     } catch (err) {
       console.log(err);
     }
@@ -82,7 +74,7 @@ const AddProduct = () => {
             label="Price"
             type="number"
             onChange={(e) =>
-              setFormState({ ...formState, price: Number(e.target.value) })
+              setFormState({ ...formState, price: e.target.value })
             }
             sx={{ width: "100%", margin: 2 }}
           />
@@ -99,7 +91,7 @@ const AddProduct = () => {
             label="Cantidad de stock"
             type="number"
             onChange={(e) =>
-              setFormState({ ...formState, stock: Number(e.target.value) })
+              setFormState({ ...formState, stock: e.target.value })
             }
             sx={{ width: "100%", margin: 2 }}
           />
@@ -130,13 +122,7 @@ const AddProduct = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Button
-            variant="contained"
-            sx={{ width: "100%", margin: 2 }}
-            onClick={() => handleSubmit()}
-          >
-            Agregar producto
-          </Button>
+          <ButtonWithLoading title="Agregar producto" onClick={() => handleSubmit()} loading={loading} />
         </Grid>
       </Grid>
     </Box>

@@ -7,7 +7,7 @@ interface Product {
   image: string;
 }
 
-export const createProduct = async (product: Product) => {
+export const createProductService = async (product: Product) => {
     const config = {
       headers: {
         "tkn-authorize": sessionStorage.getItem("user-token")
