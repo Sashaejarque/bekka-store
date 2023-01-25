@@ -15,7 +15,6 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      {/* <CategoriesCarousel /> */}
       <ProductsList />
     </Layout>
   );

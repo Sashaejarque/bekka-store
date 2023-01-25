@@ -1,7 +1,7 @@
 import { Button, Grid, Typography } from "@mui/material";
 import Link from "next/link";
 import React from "react";
-import { useAuth } from "../../features/Login/context/AuthProvider";
+import { useAuth } from "../Login/context/AuthProvider";
 import LayoutPrivateRoute from "../../templates/Layout/LayoutPrivateRoute";
 import Router from "next/router";
 
@@ -31,7 +31,7 @@ const BackOfficeHome = () => {
           <Link href="/admin/products/add">Add product</Link>
         </Grid>
         <Grid item m={4}>
-          <Link href="/">Products</Link>
+          <Link href="/admin/products/list">Products</Link>
         </Grid>
         <Grid item m={4}>
           <Button variant="contained" color="error" onClick={handleLogout}>

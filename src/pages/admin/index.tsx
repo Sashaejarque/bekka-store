@@ -1,5 +1,5 @@
 import React from "react";
-import BackOfficeHome from "../../features/backoffice/Backoffice";
+import BackOfficeHome from "../../features/Backoffice/Backoffice";
 
 const Index = () => {
   return (
