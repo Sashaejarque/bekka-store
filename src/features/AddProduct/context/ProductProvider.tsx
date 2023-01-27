@@ -26,14 +26,15 @@ export const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
 
     try {
       dispatch({ type: "LOADING_TRUE" });
-      const imageUploaded: string = await uploadImage(image);
+      const imageUploaded: { public_id: string, secure_url: string} = await uploadImage(image);
       if(!imageUploaded) return toast.error('Error al subir la imagen');
-
+      
       const product = {
         name,
         price: Number(price),
         stock: Number(stock),
-        image: imageUploaded,
+        image: imageUploaded.secure_url,
+        public_id: imageUploaded.public_id,
       };
 
       const postProduct = await createProductService(product);
