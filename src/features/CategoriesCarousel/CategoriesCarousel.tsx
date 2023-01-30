@@ -1,7 +1,7 @@
 import { CircularProgress, Divider, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CategoryCarousel from "../../components/CategoryCarousel/CategoryCarousel";
-import { fetchCategories } from "../../services/categories";
+/* import { fetchCategories } from "../../services/categories"; */
 
 const CategoriesCarousel = () => {
   // TODO: Agregar endpoint para carrousel de categorias
