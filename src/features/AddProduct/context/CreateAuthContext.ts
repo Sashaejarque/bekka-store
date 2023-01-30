@@ -1,14 +1,14 @@
 import { createContext } from "react";
 
-interface AuthState {
+interface ProductState {
     loading: boolean;
 }
 
-export interface AuthContext {
-    state: AuthState;
+export interface ProductContext {
+    state: ProductState;
     actions: {
       createProduct: (name: string, price: string, stock: string, image?: File | null) => void;
     };
 }
 
-export const ProductContext = createContext<AuthContext | undefined>(undefined);
+export const ProductContext = createContext<ProductContext | undefined>(undefined);

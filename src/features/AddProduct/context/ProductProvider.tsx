@@ -42,7 +42,7 @@ export const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
         if (postProduct) {
             toast.success("Producto creado correctamente");
             dispatch({ type: "LOADING_FALSE" });
-            Router.push("/admin");
+            Router.push("/admin/products/list");
         }
     } catch (e) {
       console.error(e);
