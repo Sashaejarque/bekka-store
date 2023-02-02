@@ -36,7 +36,6 @@ const AddProduct = () => {
         alignItems: "center",
         justifyContent: "center",
       }}
-      /* mt={4} */
     >
       <Grid container item xs={12} md={6}>
         <Grid item xs={12}>

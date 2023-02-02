@@ -1,19 +1,20 @@
-import React, { FC, PropsWithChildren, useContext, useReducer } from "react";
+import React, { FC, PropsWithChildren, ReactElement, useContext, useMemo, useReducer } from "react";
 import { productReducer } from "../reducer/productReducer";
 import { createProductService } from "../services/createProduct";
 import { uploadImage } from "../services/uploadImage";
 import { ProductContext } from "./CreateAuthContext";
 import { useToast } from "use-toast-mui";
 import Router from "next/router";
+import { useCallback } from "react";
 
-export const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
+export const ProductProvider= ({ children }: PropsWithChildren): ReactElement => {
   const [state, dispatch] = useReducer(productReducer, {
     loading: false,
   });
 
   const toast = useToast();
 
-  const createProduct = async (
+  const createProduct = useCallback(async (
     name: string,
     price: string,
     stock: string,
@@ -47,18 +48,20 @@ export const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
     } catch (e) {
       console.error(e);
     }
-  };
+  }, [toast])
+
+  const value = useMemo(() => {
+    return {
+      state,
+      actions: {
+        createProduct,
+      },
+    };
+  }, [createProduct, state])
 
   return (
     <ProductContext.Provider
-      value={{
-        state: {
-          loading: state.loading,
-        },
-        actions: {
-          createProduct,
-        },
-      }}
+      value={value}
     >
       {children}
     </ProductContext.Provider>
