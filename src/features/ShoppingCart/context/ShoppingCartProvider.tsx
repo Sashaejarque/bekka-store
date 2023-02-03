@@ -104,20 +104,24 @@ export const ShoppingCartProvider: FC<PropsWithChildren> = ({ children }) => {
     [state.items, storage]
   );
 
+  const values = useMemo(() => {
+    return {
+      state,
+      actions: {
+        addProductToCart,
+        increaseOneProductToCart,
+        decrementOneProductToCart,
+        removeItem,
+        getItemQuantity,
+        resetItemQuantity,
+        getItemsFromLocalStorage,
+      },
+    }
+  }, [addProductToCart, decrementOneProductToCart, getItemQuantity, increaseOneProductToCart, removeItem, resetItemQuantity, state, getItemsFromLocalStorage]);
+
   return (
     <ShoppingCartContext.Provider
-      value={{
-        state,
-        actions: {
-          addProductToCart,
-          increaseOneProductToCart,
-          decrementOneProductToCart,
-          removeItem,
-          getItemQuantity,
-          resetItemQuantity,
-          getItemsFromLocalStorage,
-        },
-      }}
+      value={values}
     >
       {children}
     </ShoppingCartContext.Provider>

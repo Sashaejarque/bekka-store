@@ -1,5 +1,5 @@
 import { AxiosHeaders, AxiosRequestConfig, AxiosResponse } from "axios";
-import { FC, PropsWithChildren, useContext, useReducer } from "react";
+import { FC, PropsWithChildren, useCallback, useContext, useMemo, useReducer } from "react";
 import { login } from "../../../services/auth";
 import { authReducer } from "../reducer/authReducer";
 import { AuthContext } from "./CreateAuthContext";
@@ -27,7 +27,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const toast = useToast();
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = useCallback( async (email: string, password: string) => {
     if (!email || !password) return toast.error("Todos los campos son obligatorios");
     if(!email.includes('@')) return toast.error('El email no es válido');
     if(password.length < 6) return toast.error('La contraseña debe tener al menos 6 caracteres');
@@ -54,26 +54,30 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
-  };
+  },[toast])
 
   const handleLogout = () => {
     sessionStorage.removeItem("user-token");
     dispatch({ type: "SIGN_OUT" });
   };
 
+  const values = useMemo(() => {
+    return {
+      state: {
+        isLogged: state.isLogged,
+        jwt: state.jwt,
+        loading: state.loading,
+      },
+      actions: {
+        signIn,
+        signOut: handleLogout,
+      },
+    }
+  }, [signIn, state])
+
   return (
     <AuthContext.Provider
-      value={{
-        state: {
-          isLogged: state.isLogged,
-          jwt: state.jwt,
-          loading: state.loading,
-        },
-        actions: {
-          signIn,
-          signOut: handleLogout,
-        },
-      }}
+      value={values}
     >
       {children}
     </AuthContext.Provider>

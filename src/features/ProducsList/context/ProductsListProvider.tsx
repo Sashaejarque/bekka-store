@@ -3,6 +3,7 @@ import React, {
   PropsWithChildren,
   useCallback,
   useContext,
+  useMemo,
   useReducer,
 } from "react";
 import { fetchAllProducts } from "../../../services/products";
@@ -29,9 +30,14 @@ export const ProductListProvider: FC<PropsWithChildren> = ({ children }) => {
       console.error(error);
     }
   }, []);
+
+  const values = useMemo(() => {
+    return { state, actions: { getAllProducts } };
+  }, [getAllProducts, state]);
+
   return (
     <ProductsListContext.Provider
-      value={{ state, actions: { getAllProducts } }}
+      value={values}
     >
       {children}
     </ProductsListContext.Provider>

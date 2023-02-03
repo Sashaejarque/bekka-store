@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useCallback, useContext, useReducer } from "react";
+import { FC, PropsWithChildren, useCallback, useContext, useMemo, useReducer } from "react";
 import { useToast } from "use-toast-mui";
 import {ProductsListBackofficeContext} from "./CreateProductListBackofficeContext";
 import { productListBackofficeReducer } from "../reducer/productListBackofficeReducer";
@@ -37,19 +37,23 @@ export const ProductsListBackofficeProvider: FC<PropsWithChildren> = ({ children
     }
   }, [toast]);
 
+  const values = useMemo(() => {
+   return {
+      state: {
+        loading: state.loading,
+          products: state.products,
+          loadingDelete: state.loadingDelete,
+      },
+      actions: {
+        getAllProducts,
+        deleteProduct
+      },
+    }
+  }, [getAllProducts, state, deleteProduct]);
+
   return (
     <ProductsListBackofficeContext.Provider
-      value={{
-        state: {
-          loading: state.loading,
-            products: state.products,
-            loadingDelete: state.loadingDelete,
-        },
-        actions: {
-          getAllProducts,
-          deleteProduct
-        },
-      }}
+      value={values}
     >
       {children}
     </ProductsListBackofficeContext.Provider>
