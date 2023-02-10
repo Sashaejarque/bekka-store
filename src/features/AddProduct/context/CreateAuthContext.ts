@@ -7,7 +7,7 @@ interface ProductState {
 export interface ProductContext {
     state: ProductState;
     actions: {
-      createProduct: (name: string, price: string, stock: string, image?: File | null) => void;
+      createProduct: (name: string, price: number, stock: number, image: File ) => void;
     };
 }
 

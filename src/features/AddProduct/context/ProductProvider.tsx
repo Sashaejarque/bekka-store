@@ -16,15 +16,10 @@ export const ProductProvider= ({ children }: PropsWithChildren): ReactElement =>
 
   const createProduct = useCallback(async (
     name: string,
-    price: string,
-    stock: string,
-    image?: File | null
+    price: number,
+    stock: number,
+    image: File
   ) => {
-    if(!name || !price || !stock) return toast.error('Todos los campos son obligatorios');
-    if(Number(price) <= 0) return toast.error('El precio debe ser mayor a 0');
-    if(Number(stock) <= 0) return toast.error('El stock debe ser mayor a 0');
-    if (!image) return toast.error("La imagen es obligatoria");
-
     try {
       dispatch({ type: "LOADING_TRUE" });
       const imageUploaded: { public_id: string, secure_url: string} = await uploadImage(image);
@@ -32,8 +27,8 @@ export const ProductProvider= ({ children }: PropsWithChildren): ReactElement =>
       
       const product = {
         name,
-        price: Number(price),
-        stock: Number(stock),
+        price,
+        stock,
         image: imageUploaded.secure_url,
         public_id: imageUploaded.public_id,
       };

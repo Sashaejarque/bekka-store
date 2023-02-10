@@ -3,7 +3,7 @@ import React, { FC } from "react";
 
 interface IButtonWithLoading {
   loading: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   title: string;
 }
 
@@ -24,6 +24,7 @@ const ButtonWithLoading: FC<IButtonWithLoading> = ({
         },
       }}
       onClick={onClick}
+      type="submit"
     >
       {loading ? <CircularProgress size={24} /> : title}
     </Button>
