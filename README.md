@@ -1,4 +1,4 @@
-## Welcome to first close ecommerce 
+## Welcome to Bekka store 
 
 This application is made with next js, typescript and ui material
 
