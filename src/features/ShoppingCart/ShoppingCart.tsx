@@ -1,14 +1,9 @@
-import Drawer from "@mui/material/Drawer";
-import {
-  Divider,
-  Grid,
-  IconButton,
-  Typography,
-} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
-import useResponsiveScreen from "../../hooks/useResponsiveScreen";
+import { Button, Divider, Grid, IconButton, Typography } from "@mui/material";
+import Drawer from "@mui/material/Drawer";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import CardCart from "../../components/CardCart/CardCart";
+import useResponsiveScreen from "../../hooks/useResponsiveScreen";
 import { useShoppingCart } from "./context/ShoppingCartProvider";
 import { calculateTotal } from "./utils/recalculateTotal";
 
@@ -35,6 +30,18 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
     const newTotal: number = calculateTotal(items);
     setTotal(newTotal);
   }, [items]);
+
+  const finishedCart = items
+    .reduce(
+      (message, product) =>
+        message.concat(
+          `* ${product.product.name} - Cantidad: ${product.quantity} \n`
+        ),
+      ``
+    )
+    .concat(`|| TOTAL: $${total}`);
+
+  const message = ('Hola, quisiera realizar el siguiente pedido: ').concat(finishedCart);
 
   useEffect(() => {
     totalRecalculated();
@@ -72,7 +79,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
           </Grid>
           <Grid item xs={12} ml={2} mt={2}>
             <Typography variant="h5" sx={styles.title}>
-              My shopping cart
+              Mi carrito de compras
             </Typography>
           </Grid>
           <Grid container item xs={12} justifyContent="center">
@@ -84,7 +91,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
                 textAlign="center"
                 sx={{ fontSize: 20, fontWeight: "bold" }}
               >
-                Shopping cart is empty
+                El carrito de compras esta vacio
               </Typography>
             </Grid>
           )}
@@ -110,8 +117,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
                 xs={12}
                 justifyContent="center"
                 alignItems="center"
-              >
-              </Grid>
+              ></Grid>
               <Grid
                 container
                 item
@@ -132,13 +138,32 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
               >
                 <Typography
                   variant="h5"
-                  sx={[styles.title, { marginBottom: 2 }]}
+                  sx={[styles.title]}
                 >
                   Total:
                 </Typography>
-                <Typography variant="h5" sx={{ marginBottom: 2 }}>
+                <Typography variant="h5">
                   {total.toFixed(2)}
                 </Typography>
+                <Button
+                  sx={{
+                    backgroundColor: "#128C7E",
+                    color: "black",
+                    "&:hover": {
+                      background: "#128C7E",
+                    },
+                  }}
+                >
+                  <a
+                    href={`https://wa.me/543412838785?text=${encodeURI(
+                      message
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Completar pedido
+                  </a>
+                </Button>
               </Grid>
             </Grid>
           </>
