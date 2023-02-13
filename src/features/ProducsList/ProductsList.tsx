@@ -1,21 +1,22 @@
-import { CircularProgress, Grid, Typography } from "@mui/material";
-import React, { useEffect, useMemo, useState } from "react";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import SearchAndFilter from "./components/SearchAndFilter";
-import { filteredProducts } from "./utils/filteredProducts";
-import { useProductListContext } from "./context/ProductsListProvider";
+import { CircularProgress, Grid, Typography } from '@mui/material';
+import React, { useEffect, useMemo, useState } from 'react';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import SearchAndFilter from './components/SearchAndFilter';
+import { filteredProducts } from './utils/filteredProducts';
+import { useProductListContext } from './context/ProductsListProvider';
 
-const ProductsList = () => {
-  const [filter, setFilter] = useState("");
-  const [category, setCategory] = useState("");
+function ProductsList() {
+  const [filter, setFilter] = useState('');
+  const [category, setCategory] = useState('');
   const {
     state: { products, loading },
     actions: { getAllProducts },
   } = useProductListContext();
 
-  const productsFiltered = useMemo(() => {
-    return filteredProducts(products, filter, category);
-  }, [products, filter, category]);
+  const productsFiltered = useMemo(
+    () => filteredProducts(products, filter, category),
+    [products, filter, category]
+  );
 
   useEffect(() => {
     getAllProducts();
@@ -28,13 +29,7 @@ const ProductsList = () => {
           Our products
         </Typography>
       </Grid>
-      <Grid
-        container
-        item
-        xs={12}
-        justifyContent="center"
-        alignItems="center"
-      >
+      <Grid container item xs={12} justifyContent="center" alignItems="center">
         <SearchAndFilter
           onChangeSearchInput={(e) => setFilter(e.target.value)}
         />
@@ -74,6 +69,6 @@ const ProductsList = () => {
       </Grid>
     </>
   );
-};
+}
 
 export default ProductsList;

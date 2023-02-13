@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import { Box, Card, Grid, IconButton, Typography } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import React, { FC } from "react";
-import Counter from "../Counter/Counter";
-import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
-import { ShoppingCartItem } from "../../features/ShoppingCart/reducer/shoppingCartReducer";
+import { Box, Card, Grid, IconButton, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import React, { FC } from 'react';
+import Counter from '../Counter/Counter';
+import { useShoppingCart } from '../../features/ShoppingCart/context/ShoppingCartProvider';
+import { ShoppingCartItem } from '../../features/ShoppingCart/reducer/shoppingCartReducer';
 
 interface Props {
   item: ShoppingCartItem;
@@ -29,12 +29,12 @@ const CardCart: FC<Props> = ({ item }) => {
     }
   };
   return (
-    <Box mt={2} sx={{ width: "90%", minHeight: 80 }}>
-      <Card sx={{ display: "flex", minHeight: 80 }}>
+    <Box mt={2} sx={{ width: '90%', minHeight: 80 }}>
+      <Card sx={{ display: 'flex', minHeight: 80 }}>
         <Grid container item xs={2} justifyContent="center" alignItems="center">
           <img
             alt="prueba"
-            style={{ maxWidth: '90%', maxHeight: "95%" }}
+            style={{ maxWidth: '90%', maxHeight: '95%' }}
             src={item.product.image}
             data-testid="image-cardcart"
           />
@@ -73,8 +73,8 @@ const style = {
     fontSize: 12,
   },
   icon: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     width: 18,
     height: 17,
     marginRigth: 1,

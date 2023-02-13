@@ -1,6 +1,6 @@
-import { Reducer } from "react";
-import Products from "../../../models/Product";
-import ProductsListActions from "../actions/ProductListActions";
+import { Reducer } from 'react';
+import Products from '../../../models/Product';
+import ProductsListActions from '../actions/ProductListActions';
 
 export interface CreateProductsState {
   products: Products[];
@@ -21,17 +21,17 @@ export const productsListReducer: CreateProductReducer = (
   action: ProductsListActions
 ) => {
   switch (action.type) {
-    case "ADD_PRODUCTS_TO_STATE":
+    case 'ADD_PRODUCTS_TO_STATE':
       return {
         ...state,
         products: action.payload,
       };
-    case "SET_LOADING_TRUE":
+    case 'SET_LOADING_TRUE':
       return {
         ...state,
         loading: true,
       };
-    case "SET_LOADING_FALSE":
+    case 'SET_LOADING_FALSE':
       return {
         ...state,
         loading: false,

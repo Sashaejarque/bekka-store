@@ -1,12 +1,12 @@
-import { render } from "@testing-library/react";
-import { expect, it, describe } from "@jest/globals";
-import React from "react";
-import Layout from "../Layout/Layout";
-import { ProductListProvider } from "../../features/ProducsList/context/ProductsListProvider";
-import { ShoppingCartProvider } from "../../features/ShoppingCart/context/ShoppingCartProvider";
+import { render } from '@testing-library/react';
+import { expect, it, describe } from '@jest/globals';
+import React from 'react';
+import Layout from '../Layout/Layout';
+import { ProductListProvider } from '../../features/ProducsList/context/ProductsListProvider';
+import { ShoppingCartProvider } from '../../features/ShoppingCart/context/ShoppingCartProvider';
 
-describe("Layout", () => {
-  it("should render correctly", () => {
+describe('Layout', () => {
+  it('should render correctly', () => {
     const component = render(
       <ShoppingCartProvider>
         <ProductListProvider>
@@ -19,7 +19,7 @@ describe("Layout", () => {
     expect(component).not.toBeNull();
   });
 
-  it("should render correctly the children", () => {
+  it('should render correctly the children', () => {
     const component = render(
       <ShoppingCartProvider>
         <ProductListProvider>
@@ -31,13 +31,13 @@ describe("Layout", () => {
     );
 
     const { getByTestId } = component;
-    const children = getByTestId("children");
+    const children = getByTestId('children');
     expect(children).toBeTruthy();
-    expect(children.textContent).toBe("test");
-    expect(children.tagName).toBe("H1");
+    expect(children.textContent).toBe('test');
+    expect(children.tagName).toBe('H1');
   });
 
-  it("should render correctly the header", () => {
+  it('should render correctly the header', () => {
     const component = render(
       <ShoppingCartProvider>
         <ProductListProvider>
@@ -49,8 +49,8 @@ describe("Layout", () => {
     );
 
     const { getByTestId } = component;
-    const header = getByTestId("header");
+    const header = getByTestId('header');
     expect(header).toBeTruthy();
-    expect(header.tagName).toBe("DIV");
+    expect(header.tagName).toBe('DIV');
   });
 });

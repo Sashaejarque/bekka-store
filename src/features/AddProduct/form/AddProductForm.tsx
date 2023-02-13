@@ -1,27 +1,27 @@
-import { Grid, TextField, Typography } from "@mui/material";
-import React, { FC } from "react";
-import { useForm } from "react-hook-form";
-import ButtonWithLoading from "../../../components/Button/ButtonWithLoading";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { prepareToJson } from "../utils/prepareToJson";
-import { useProducts } from "../context/ProductProvider";
+import { Grid, TextField, Typography } from '@mui/material';
+import React, { FC } from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import ButtonWithLoading from '../../../components/Button/ButtonWithLoading';
+import { prepareToJson } from '../utils/prepareToJson';
+import { useProducts } from '../context/ProductProvider';
 
 const schema = yup.object().shape({
   name: yup.string().required('El nombre es requerido'),
   price: yup.number().required(),
   stock: yup.number().required(),
-  image: yup.mixed().test("file", "You need to provide a file", (value) => {
+  image: yup.mixed().test('file', 'You need to provide a file', (value) => {
     // @ts-ignore
-    if(value && value.length > 0) {
+    if (value && value.length > 0) {
       return true;
     }
     return false;
-    }),
+  }),
 });
 interface Props {
   loading: boolean;
-};
+}
 
 interface formData {
   name: string;
@@ -30,10 +30,10 @@ interface formData {
   image: File | null;
 }
 
-const AddProductForm: FC<Props> = ({
-  loading,
-}) => {
-  const { actions: { createProduct }} = useProducts();
+const AddProductForm: FC<Props> = ({ loading }) => {
+  const {
+    actions: { createProduct },
+  } = useProducts();
   const {
     register,
     handleSubmit,
@@ -44,95 +44,84 @@ const AddProductForm: FC<Props> = ({
 
   const onSubmitHandler = (data: any) => {
     const formData = prepareToJson(data);
-   try {
-    createProduct(formData.name, formData.price, formData.stock, formData.image);
-   } catch (error) {
-     console.log(error);
-   }
+    try {
+      createProduct(
+        formData.name,
+        formData.price,
+        formData.stock,
+        formData.image
+      );
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmitHandler)}
       style={{
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <Grid container item xs={12} md={6}>
         <Grid item xs={12}>
           <Typography
-            sx={{ fontWeight: 600, fontSize: 40, textAlign: "center" }}
+            sx={{ fontWeight: 600, fontSize: 40, textAlign: 'center' }}
           >
             Agregar producto
           </Typography>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-        >
+        <Grid container item xs={12}>
           <TextField
             id="name"
             label="Nombre del producto"
-            sx={{ width: "100%", marginRigth: 2, marginLeft: 2, marginTop: 2 }}
-            {...register("name")}
+            sx={{ width: '100%', marginRigth: 2, marginLeft: 2, marginTop: 2 }}
+            {...register('name')}
             error={!!errors.name}
           />
-          <Typography sx={{ color: "red", fontSize: 10, marginLeft: 4 }}>
+          <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 4 }}>
             {errors.name?.message && 'El nombre es requerido'}
-            </Typography>
+          </Typography>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-        >
+        <Grid container item xs={12}>
           <TextField
             id="price"
             label="Price"
             type="number"
             error={!!errors.price}
-            sx={{ width: "100%", marginRigth: 2, marginLeft: 2, marginTop: 2 }}
-            {...register("price")}
+            sx={{ width: '100%', marginRigth: 2, marginLeft: 2, marginTop: 2 }}
+            {...register('price')}
           />
-          <Typography sx={{ color: "red", fontSize: 10, marginLeft: 4 }}>
+          <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 4 }}>
             {errors.price?.message && 'El precio es requerido'}
-            </Typography>
+          </Typography>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-        >
+        <Grid container item xs={12}>
           <TextField
             id="stock"
             label="Cantidad de stock"
             type="number"
             error={!!errors.stock}
-            sx={{ width: "100%",  marginRigth: 2, marginLeft: 2, marginTop: 2 }}
-            {...register("stock")}
+            sx={{ width: '100%', marginRigth: 2, marginLeft: 2, marginTop: 2 }}
+            {...register('stock')}
           />
-          <Typography sx={{ color: "red", fontSize: 10, marginLeft: 4 }}>
+          <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 4 }}>
             {errors.name?.message && 'El precio es requerido'}
-            </Typography>
+          </Typography>
         </Grid>
-        <Grid
-          container
-          item
-          xs={12}
-        >
+        <Grid container item xs={12}>
           <TextField
             type="file"
-            sx={{ width: "100%", marginRigth: 2, marginLeft: 2, marginTop: 2 }}
+            sx={{ width: '100%', marginRigth: 2, marginLeft: 2, marginTop: 2 }}
             error={!!errors.image}
-            {...register("image")}
+            {...register('image')}
           />
-          <Typography sx={{ color: "red", fontSize: 10, marginLeft: 4 }}>
+          <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 4 }}>
             {errors.image?.message && 'La imagen es requerida'}
-            </Typography>
+          </Typography>
         </Grid>
 
         <Grid

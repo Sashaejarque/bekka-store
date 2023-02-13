@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const useResponsiveScreen = () => {
   const [width, setWidth] = useState(0);
@@ -9,10 +9,10 @@ const useResponsiveScreen = () => {
     // https://stackoverflow.com/questions/55151041/window-is-not-defined-in-next-js-react-app
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 

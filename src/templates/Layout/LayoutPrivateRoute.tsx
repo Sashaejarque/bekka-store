@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC, PropsWithChildren, useEffect, useState } from "react";
+import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -13,12 +13,12 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-} from "@mui/material";
-import Header from "../../components/Header/Header";
-import Router from "next/router";
-import { useAuth } from "../../features/Login/context/AuthProvider";
-import SideBarBackoffice from "../../components/SideBar/SideBarBackoffice";
-import useResponsiveScreen from "../../hooks/useResponsiveScreen";
+} from '@mui/material';
+import Router from 'next/router';
+import Header from '../../components/Header/Header';
+import { useAuth } from '../../features/Login/context/AuthProvider';
+import SideBarBackoffice from '../../components/SideBar/SideBarBackoffice';
+import useResponsiveScreen from '../../hooks/useResponsiveScreen';
 
 const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
   const { width } = useResponsiveScreen();
 
   useEffect(() => {
-    const token = sessionStorage.getItem("user-token");
+    const token = sessionStorage.getItem('user-token');
     if (token || isLogged) {
       setLogged(true);
     }
@@ -45,9 +45,7 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
             <CircularProgress />
           </Grid>
         ) : logged ? (
-          <div style={{ width: width - 240, marginLeft: 240 }}>
-            {children}
-          </div>
+          <div style={{ width: width - 240, marginLeft: 240 }}>{children}</div>
         ) : (
           <Grid
             container
@@ -59,7 +57,7 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
             <h4>
               La página a la que estás intentando acceder es un área restringida
             </h4>
-            <Button onClick={() => Router.push("/")}>Ir al home</Button>
+            <Button onClick={() => Router.push('/')}>Ir al home</Button>
           </Grid>
         )}
       </Grid>
@@ -69,11 +67,11 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
 
 const styles = {
   container: {
-    minHeight: "100vh",
-    overflow: "hidden",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
+    minHeight: '100vh',
+    overflow: 'hidden',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
   },
 };
 

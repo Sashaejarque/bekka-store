@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Box,
   CssBaseline,
@@ -10,42 +10,42 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-} from "@mui/material";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import AutoGraphOutlinedIcon from "@mui/icons-material/AutoGraphOutlined";
-import Router, { useRouter } from "next/router";
-import { useAuth } from "../../features/Login/context/AuthProvider";
+} from '@mui/material';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
+import Router, { useRouter } from 'next/router';
+import { useAuth } from '../../features/Login/context/AuthProvider';
 
 interface ObjectType {
   Dashboard: string;
   Productos: string;
-  "Add producto": string;
+  'Add producto': string;
 }
 
-const SideBarBackoffice = () => {
+function SideBarBackoffice() {
   const {
     actions: { signOut },
   } = useAuth();
   const router = useRouter();
-  const pathname = router.pathname;
+  const { pathname } = router;
 
   const handleLogout = () => {
     signOut();
-    Router.push("/");
+    Router.push('/');
   };
 
   const path = {
-    Dashboard: "/admin/dashboard",
-    Productos: "/admin/products/list",
-    "Add producto": "/admin/products/add",
+    Dashboard: '/admin/dashboard',
+    Productos: '/admin/products/list',
+    'Add producto': '/admin/products/add',
   };
 
   const icons = {
     Dashboard: <AutoGraphOutlinedIcon />,
     Productos: <ShoppingCartOutlinedIcon />,
-    "Add producto": <AddShoppingCartOutlinedIcon />,
+    'Add producto': <AddShoppingCartOutlinedIcon />,
   };
 
   return (
@@ -59,7 +59,7 @@ const SideBarBackoffice = () => {
             alignItems="center"
             item
             xs={12}
-            sx={{ background: "black" }}
+            sx={{ background: 'black' }}
           >
             <h2 style={styles.bekkaTittle}>BEKKA</h2>
           </Grid>
@@ -71,7 +71,7 @@ const SideBarBackoffice = () => {
           </Grid>
           <Grid item xs={12}>
             <List>
-              {["Dashboard", "Productos", "Add producto"].map((text, index) => (
+              {['Dashboard', 'Productos', 'Add producto'].map((text, index) => (
                 <ListItem
                   key={text}
                   onClick={() => Router.push(path[text as keyof ObjectType])}
@@ -104,30 +104,30 @@ const SideBarBackoffice = () => {
       </Box>
     </Drawer>
   );
-};
+}
 
 const styles = {
   drawerContainer: {
     width: 240,
-    height: "100%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   cardContainer: {
     width: 200,
     height: 80,
-    backgroundColor: "rgba(145, 158, 171, 0.12)",
+    backgroundColor: 'rgba(145, 158, 171, 0.12)',
     borderRadius: 4,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
   },
   bekkaTittle: {
-    color: "white",
-    cursor: "pointer",
-    fontFamily: "TenorSans",
+    color: 'white',
+    cursor: 'pointer',
+    fontFamily: 'TenorSans',
     letterSpacing: 20,
     fontSize: 30,
   },

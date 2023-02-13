@@ -1,13 +1,13 @@
-import React from "react";
-import LoginUI from "../../features/Login/Login";
-import { Layout } from "../../templates";
+import React from 'react';
+import LoginUI from '../../features/Login/Login';
+import { Layout } from '../../templates';
 
-const Login = () => {
+function Login() {
   return (
     <Layout>
-        <LoginUI />
+      <LoginUI />
     </Layout>
   );
-};
+}
 
 export default Login;

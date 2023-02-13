@@ -8,12 +8,12 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-} from "@mui/material";
-import React, { useEffect } from "react";
-import { useProductListBackofficeContext } from "./context/ProductListBackofficeProvider";
-import IconButtonWithLoading from "../../components/Button/DeleteButtonWithLoading";
+} from '@mui/material';
+import React, { useEffect } from 'react';
+import { useProductListBackofficeContext } from './context/ProductListBackofficeProvider';
+import IconButtonWithLoading from '../../components/Button/DeleteButtonWithLoading';
 
-const ProductListBackoffice = () => {
+function ProductListBackoffice() {
   const {
     state: { products, loading, loadingDelete },
     actions: { getAllProducts, deleteProduct },
@@ -31,21 +31,39 @@ const ProductListBackoffice = () => {
           <CircularProgress />
         </Grid>
       ) : (
-        <TableContainer component={Paper} sx={{ marginTop: 2}}>
+        <TableContainer component={Paper} sx={{ marginTop: 2 }}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell align="left" sx={{ background: 'black', color: 'white'}}>Nombre</TableCell>
-                <TableCell align="center" sx={{ background: 'black', color: 'white'}}>Precio</TableCell>
-                <TableCell align="center" sx={{ background: 'black', color: 'white'}}>Stock</TableCell>
-                <TableCell align="center" sx={{ background: 'black', color: 'white'}}></TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ background: 'black', color: 'white' }}
+                >
+                  Nombre
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ background: 'black', color: 'white' }}
+                >
+                  Precio
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ background: 'black', color: 'white' }}
+                >
+                  Stock
+                </TableCell>
+                <TableCell
+                  align="center"
+                  sx={{ background: 'black', color: 'white' }}
+                />
               </TableRow>
             </TableHead>
             <TableBody>
               {products.map((row) => (
                 <TableRow
                   key={row.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell align="left">{row.name}</TableCell>
                   <TableCell align="center">{row.price}</TableCell>
@@ -66,6 +84,6 @@ const ProductListBackoffice = () => {
       )}
     </Grid>
   );
-};
+}
 
 export default ProductListBackoffice;

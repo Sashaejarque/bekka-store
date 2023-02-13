@@ -1,11 +1,10 @@
 interface LoadingFalse {
-    type: 'LOADING_FALSE';
+  type: 'LOADING_FALSE';
 }
 
 interface LoadingTrue {
-    type: 'LOADING_TRUE';
+  type: 'LOADING_TRUE';
 }
-
 
 type ProductsActions = LoadingFalse | LoadingTrue;
 

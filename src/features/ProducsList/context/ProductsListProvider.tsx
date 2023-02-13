@@ -5,14 +5,14 @@ import React, {
   useContext,
   useMemo,
   useReducer,
-} from "react";
-import { fetchAllProducts } from "../../../services/products";
+} from 'react';
+import { fetchAllProducts } from '../../../services/products';
 import {
   CreateProductReducer,
   initialState,
   productsListReducer,
-} from "../reducer/productsListReducer";
-import { ProductsListContext } from "./CreateProductsListContext";
+} from '../reducer/productsListReducer';
+import { ProductsListContext } from './CreateProductsListContext';
 
 export const ProductListProvider: FC<PropsWithChildren> = ({ children }) => {
   const [state, dispatch] = useReducer<CreateProductReducer>(
@@ -22,23 +22,22 @@ export const ProductListProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const getAllProducts = useCallback(async () => {
     try {
-      dispatch({ type: "SET_LOADING_TRUE" });
+      dispatch({ type: 'SET_LOADING_TRUE' });
       const products = await fetchAllProducts();
-      dispatch({ type: "ADD_PRODUCTS_TO_STATE", payload: products?.data });
-      dispatch({ type: "SET_LOADING_FALSE" });
+      dispatch({ type: 'ADD_PRODUCTS_TO_STATE', payload: products?.data });
+      dispatch({ type: 'SET_LOADING_FALSE' });
     } catch (error) {
       console.error(error);
     }
   }, []);
 
-  const values = useMemo(() => {
-    return { state, actions: { getAllProducts } };
-  }, [getAllProducts, state]);
+  const values = useMemo(
+    () => ({ state, actions: { getAllProducts } }),
+    [getAllProducts, state]
+  );
 
   return (
-    <ProductsListContext.Provider
-      value={values}
-    >
+    <ProductsListContext.Provider value={values}>
       {children}
     </ProductsListContext.Provider>
   );
@@ -48,7 +47,7 @@ export const useProductListContext = () => {
   const context = useContext(ProductsListContext);
   if (context === undefined) {
     throw new Error(
-      "useProductListContext must be used within a ProductListProvider"
+      'useProductListContext must be used within a ProductListProvider'
     );
   }
   return context;

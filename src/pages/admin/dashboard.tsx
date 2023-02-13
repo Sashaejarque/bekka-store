@@ -1,10 +1,8 @@
-import React from "react";
-import BackOfficeHome from "../../features/Backoffice/Backoffice";
+import React from 'react';
+import BackOfficeHome from '../../features/Backoffice/Backoffice';
 
-const Index = () => {
-  return (
-    <BackOfficeHome />
-  );
-};
+function Index() {
+  return <BackOfficeHome />;
+}
 
 export default Index;

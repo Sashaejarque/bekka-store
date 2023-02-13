@@ -1,9 +1,9 @@
-import { CircularProgress, Divider, Grid, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import CategoryCarousel from "../../components/CategoryCarousel/CategoryCarousel";
+import { CircularProgress, Divider, Grid, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import CategoryCarousel from '../../components/CategoryCarousel/CategoryCarousel';
 /* import { fetchCategories } from "../../services/categories"; */
 
-const CategoriesCarousel = () => {
+function CategoriesCarousel() {
   // TODO: Agregar endpoint para carrousel de categorias
   const [categoriesList, setCategoriesList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,10 +25,10 @@ const CategoriesCarousel = () => {
         </Grid>
       )}
       <Grid container item xs={12} justifyContent="center">
-        <Divider sx={{ width: "90%" }} />
+        <Divider sx={{ width: '90%' }} />
       </Grid>
     </>
   );
-};
+}
 
 export default CategoriesCarousel;

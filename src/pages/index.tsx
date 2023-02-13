@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { Layout } from "../templates";
-import CategoriesCarousel from "../features/CategoriesCarousel/CategoriesCarousel";
-import ProductsList from "../features/ProducsList/ProductsList";
-import { useShoppingCart } from "../features/ShoppingCart/context/ShoppingCartProvider";
+import React, { useEffect } from 'react';
+import { Layout } from '../templates';
+import CategoriesCarousel from '../features/CategoriesCarousel/CategoriesCarousel';
+import ProductsList from '../features/ProducsList/ProductsList';
+import { useShoppingCart } from '../features/ShoppingCart/context/ShoppingCartProvider';
 
-const IndexPage = () => {
+function IndexPage() {
   const {
     actions: { getItemsFromLocalStorage },
   } = useShoppingCart();
@@ -18,6 +18,6 @@ const IndexPage = () => {
       <ProductsList />
     </Layout>
   );
-};
+}
 
 export default IndexPage;

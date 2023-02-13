@@ -1,11 +1,11 @@
-import { Button, Drawer, Grid, Typography } from "@mui/material";
-import Link from "next/link";
-import React from "react";
-import { useAuth } from "../Login/context/AuthProvider";
-import LayoutPrivateRoute from "../../templates/Layout/LayoutPrivateRoute";
-import Router from "next/router";
+import { Button, Drawer, Grid, Typography } from '@mui/material';
+import Link from 'next/link';
+import React from 'react';
+import Router from 'next/router';
+import { useAuth } from '../Login/context/AuthProvider';
+import LayoutPrivateRoute from '../../templates/Layout/LayoutPrivateRoute';
 
-const BackOfficeHome = () => {
+function BackOfficeHome() {
   const [open, setOpen] = React.useState(true);
   const {
     actions: { signOut },
@@ -13,7 +13,7 @@ const BackOfficeHome = () => {
 
   const handleLogout = () => {
     signOut();
-    Router.push("/");
+    Router.push('/');
   };
   return (
     <LayoutPrivateRoute>
@@ -24,11 +24,13 @@ const BackOfficeHome = () => {
         flexDirection="column"
       >
         <Grid item xs={12}>
-          <Typography variant="h5" textAlign="left">Hola, bienvenido devuelta</Typography>
+          <Typography variant="h5" textAlign="left">
+            Hola, bienvenido devuelta
+          </Typography>
         </Grid>
       </Grid>
     </LayoutPrivateRoute>
   );
-};
+}
 
 export default BackOfficeHome;

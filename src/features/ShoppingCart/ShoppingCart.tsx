@@ -1,11 +1,11 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Button, Divider, Grid, IconButton, Typography } from "@mui/material";
-import Drawer from "@mui/material/Drawer";
-import { FC, useCallback, useEffect, useMemo, useState } from "react";
-import CardCart from "../../components/CardCart/CardCart";
-import useResponsiveScreen from "../../hooks/useResponsiveScreen";
-import { useShoppingCart } from "./context/ShoppingCartProvider";
-import { calculateTotal } from "./utils/recalculateTotal";
+import CloseIcon from '@mui/icons-material/Close';
+import { Button, Divider, Grid, IconButton, Typography } from '@mui/material';
+import Drawer from '@mui/material/Drawer';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import CardCart from '../../components/CardCart/CardCart';
+import useResponsiveScreen from '../../hooks/useResponsiveScreen';
+import { useShoppingCart } from './context/ShoppingCartProvider';
+import { calculateTotal } from './utils/recalculateTotal';
 
 interface Props {
   open: boolean;
@@ -41,7 +41,9 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
     )
     .concat(`|| TOTAL: $${total}`);
 
-  const message = ('Hola, quisiera realizar el siguiente pedido: ').concat(finishedCart);
+  const message = 'Hola, quisiera realizar el siguiente pedido: '.concat(
+    finishedCart
+  );
 
   useEffect(() => {
     totalRecalculated();
@@ -60,9 +62,9 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
         style={{
           maxWidth: responsiveWidth,
           minHeight: responsiveHeight,
-          display: "flex",
-          justifyContent: "space-between",
-          flexDirection: "column",
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
         }}
       >
         <Grid
@@ -89,7 +91,7 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
             <Grid item xs={12} ml={2} mt={10}>
               <Typography
                 textAlign="center"
-                sx={{ fontSize: 20, fontWeight: "bold" }}
+                sx={{ fontSize: 20, fontWeight: 'bold' }}
               >
                 El carrito de compras esta vacio
               </Typography>
@@ -109,64 +111,55 @@ const ShoppingCart: FC<Props> = ({ open, onClose }) => {
             ))}
         </Grid>
         {items.length > 0 && (
-          <>
-            <Grid container mt={3}>
-              <Grid
-                container
-                item
-                xs={12}
-                justifyContent="center"
-                alignItems="center"
-              ></Grid>
-              <Grid
-                container
-                item
-                xs={12}
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Divider sx={[styles.divider, { marginBottom: 2 }]} />
-              </Grid>
-              <Grid
-                container
-                item
-                justifyContent="space-between"
-                alignItems="center"
-                mr={6}
-                ml={6}
-                mb={2}
-              >
-                <Typography
-                  variant="h5"
-                  sx={[styles.title]}
-                >
-                  Total:
-                </Typography>
-                <Typography variant="h5">
-                  {total.toFixed(2)}
-                </Typography>
-                <Button
-                  sx={{
-                    backgroundColor: "#128C7E",
-                    color: "black",
-                    "&:hover": {
-                      background: "#128C7E",
-                    },
-                  }}
-                >
-                  <a
-                    href={`https://wa.me/543412838785?text=${encodeURI(
-                      message
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Completar pedido
-                  </a>
-                </Button>
-              </Grid>
+          <Grid container mt={3}>
+            <Grid
+              container
+              item
+              xs={12}
+              justifyContent="center"
+              alignItems="center"
+            />
+            <Grid
+              container
+              item
+              xs={12}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Divider sx={[styles.divider, { marginBottom: 2 }]} />
             </Grid>
-          </>
+            <Grid
+              container
+              item
+              justifyContent="space-between"
+              alignItems="center"
+              mr={6}
+              ml={6}
+              mb={2}
+            >
+              <Typography variant="h5" sx={[styles.title]}>
+                Total:
+              </Typography>
+              <Typography variant="h5">{total.toFixed(2)}</Typography>
+              <Button
+                sx={{
+                  backgroundColor: '#128C7E',
+                  color: 'black',
+                  '&:hover': {
+                    background: '#128C7E',
+                  },
+                }}
+              >
+                <a
+                  href={`https://wa.me/543412838785?text=${encodeURI(message)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Completar pedido
+                </a>
+              </Button>
+            </Grid>
+          </Grid>
         )}
       </div>
     </Drawer>
@@ -178,15 +171,15 @@ const styles = {
     paddingLeft: 1.3,
   },
   divider: {
-    width: "100%",
+    width: '100%',
     marginTop: 2,
   },
   button: {
-    width: "90%",
-    backgroundColor: "black",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "orange",
+    width: '90%',
+    backgroundColor: 'black',
+    color: 'white',
+    '&:hover': {
+      backgroundColor: 'orange',
     },
   },
 };

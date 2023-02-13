@@ -1,14 +1,21 @@
-import { Box, Button, CircularProgress, Grid, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
-import InputPassword from "../../components/InputPassword/InputPassword";
-import { useAuth } from "./context/AuthProvider";
-import Router from "next/router";
-import ButtonWithLoading from "../../components/Button/ButtonWithLoading";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
+import Router from 'next/router';
+import InputPassword from '../../components/InputPassword/InputPassword';
+import { useAuth } from './context/AuthProvider';
+import ButtonWithLoading from '../../components/Button/ButtonWithLoading';
 
-const LoginUI = () => {
+function LoginUI() {
   const [formState, setFormState] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const {
     actions: { signIn },
@@ -26,17 +33,17 @@ const LoginUI = () => {
   return (
     <Box
       sx={{
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
       mt={4}
     >
       <Grid container item xs={12} md={6}>
         <Grid item xs={12}>
           <Typography
-            sx={{ fontWeight: 600, fontSize: 40, textAlign: "center" }}
+            sx={{ fontWeight: 600, fontSize: 40, textAlign: 'center' }}
           >
             Iniciar sesión
           </Typography>
@@ -54,7 +61,7 @@ const LoginUI = () => {
             onChange={(e) =>
               setFormState({ ...formState, email: e.target.value })
             }
-            sx={{ width: "100%", margin: 2 }}
+            sx={{ width: '100%', margin: 2 }}
           />
         </Grid>
         <Grid
@@ -78,11 +85,15 @@ const LoginUI = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <ButtonWithLoading onClick={() => handleSubmit()} title="Iniciar sesión" loading={loading} />
+          <ButtonWithLoading
+            onClick={() => handleSubmit()}
+            title="Iniciar sesión"
+            loading={loading}
+          />
         </Grid>
       </Grid>
     </Box>
   );
-};
+}
 
 export default LoginUI;

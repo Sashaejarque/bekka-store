@@ -1,10 +1,10 @@
-import { createContext } from "react";
-import Products from "../../../models/Product";
+import { createContext } from 'react';
+import Products from '../../../models/Product';
 
 export interface ProductListBackofficeState {
-    products: Products[];
-    loading: boolean;
-    loadingDelete: boolean;
+  products: Products[];
+  loading: boolean;
+  loadingDelete: boolean;
 }
 
 export interface CreateProductBackofficeContext {
@@ -15,5 +15,5 @@ export interface CreateProductBackofficeContext {
   };
 }
 export const ProductsListBackofficeContext = createContext<
-CreateProductBackofficeContext | undefined
+  CreateProductBackofficeContext | undefined
 >(undefined);

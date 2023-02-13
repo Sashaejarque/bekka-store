@@ -6,11 +6,11 @@ import {
   CardMedia,
   Grid,
   Typography,
-} from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
-import { useShoppingCart } from "../../features/ShoppingCart/context/ShoppingCartProvider";
-import Products from "../../models/Product";
-import Counter from "../Counter/Counter";
+} from '@mui/material';
+import React, { FC, useEffect, useState } from 'react';
+import { useShoppingCart } from '../../features/ShoppingCart/context/ShoppingCartProvider';
+import Products from '../../models/Product';
+import Counter from '../Counter/Counter';
 
 interface Props {
   item: Products;
@@ -66,7 +66,7 @@ const ProductCard: FC<Props> = ({ item }) => {
           component="img"
           image={item.image}
           alt={item.name}
-          sx={{ maxHeight: 200, objectFit: "contain", maxWidth: 290 }}
+          sx={{ maxHeight: 200, objectFit: 'contain', maxWidth: 290 }}
           data-testid="image"
         />
       </div>
@@ -92,11 +92,11 @@ const ProductCard: FC<Props> = ({ item }) => {
             />
           )}
           <Button
-            sx={[style.button, { backgroundColor: "black" }]}
+            sx={[style.button, { backgroundColor: 'black' }]}
             onClick={() => handleAddProductToCart()}
             data-testid="addButtonProduct"
           >
-            <Typography sx={{ color: "white" }}>Add to cart</Typography>
+            <Typography sx={{ color: 'white' }}>Add to cart</Typography>
           </Button>
         </Grid>
       </CardActions>
@@ -106,28 +106,28 @@ const ProductCard: FC<Props> = ({ item }) => {
 
 const style = {
   containerImage: {
-    width: "100%",
+    width: '100%',
     height: 200,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    border: "1px solid #e0e0e0",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '1px solid #e0e0e0',
   },
   button: {
-    "&:hover": {
-      backgroundColor: "black",
-      transform: "scale(1.1)",
-      transition: "all 0.1s",
-      boxShadow: "0 0 0.2rem 0.2rem rgba(191, 187, 189, 0.37)",
+    '&:hover': {
+      backgroundColor: 'black',
+      transform: 'scale(1.1)',
+      transition: 'all 0.1s',
+      boxShadow: '0 0 0.2rem 0.2rem rgba(191, 187, 189, 0.37)',
     },
     marginLeft: 2,
   },
   cardContainer: {
     width: 300,
     minHeight: 400,
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "column",
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
   },
 };
 

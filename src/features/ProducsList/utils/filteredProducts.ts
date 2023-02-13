@@ -1,4 +1,4 @@
-import Products from "../../../models/Product";
+import Products from '../../../models/Product';
 
 export const filteredProducts = (
   products: Products[],
@@ -6,7 +6,7 @@ export const filteredProducts = (
   category: string
 ) => {
   const productsFilterBySearch = products.filter((product) => {
-    if (filter === "") return true;
+    if (filter === '') return true;
     return product.name.toLowerCase().includes(filter.toLowerCase());
   });
   return productsFilterBySearch;

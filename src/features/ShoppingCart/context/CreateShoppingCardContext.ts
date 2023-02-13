@@ -1,6 +1,6 @@
-import { createContext } from "react";
-import Products from "../../../models/Product";
-import { ShoppingCartItem } from "../reducer/shoppingCartReducer";
+import { createContext } from 'react';
+import Products from '../../../models/Product';
+import { ShoppingCartItem } from '../reducer/shoppingCartReducer';
 
 interface ShoppingCartState {
   items: ShoppingCartItem[];
