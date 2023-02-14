@@ -1,4 +1,5 @@
-import { AxiosHeaders, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Router from 'next/router';
 import {
   FC,
   PropsWithChildren,
@@ -7,7 +8,6 @@ import {
   useMemo,
   useReducer,
 } from 'react';
-import Router from 'next/router';
 import { useToast } from 'use-toast-mui';
 import { login } from '../../../services/auth';
 import { authReducer } from '../reducer/authReducer';
@@ -36,12 +36,6 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const signIn = useCallback(
     async (email: string, password: string) => {
-      if (!email || !password)
-        return toast.error('Todos los campos son obligatorios');
-      if (!email.includes('@')) return toast.error('El email no es válido');
-      if (password.length < 6)
-        return toast.error('La contraseña debe tener al menos 6 caracteres');
-
       try {
         dispatch({ type: 'LOADING_TRUE' });
         const response: IHttpResponse | undefined = await login(
