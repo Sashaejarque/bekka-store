@@ -6,12 +6,18 @@ import IconButton from '@mui/material/IconButton';
 import { ReactElement, useMemo, useState } from 'react';
 import { useShoppingCart } from '../../features/ShoppingCart/context/ShoppingCartProvider';
 import ShoppingCart from '../../features/ShoppingCart/ShoppingCart';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface Props {
   withButton?: boolean;
   buttonOnClick?: () => void;
+  handleIcon?: boolean;
 }
-function Header({ withButton = false, buttonOnClick }: Props): ReactElement {
+function Header({
+  withButton = false,
+  buttonOnClick,
+  handleIcon = false,
+}: Props): ReactElement {
   const [drawer, setDrawer] = useState(false);
   const {
     state: { items },
@@ -44,7 +50,11 @@ function Header({ withButton = false, buttonOnClick }: Props): ReactElement {
             onClick={buttonOnClick}
             edge="start"
           >
-            <MenuIcon color="primary" sx={{ width: 30, height: 30 }} />
+            {handleIcon ? (
+              <ArrowBackIosIcon color="primary" />
+            ) : (
+              <MenuIcon color="primary" />
+            )}
           </IconButton>
         </Grid>
       ) : (

@@ -26,7 +26,11 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Box sx={styles.container}>
-      <Header withButton buttonOnClick={() => setDrawerOpen(!drawerOpen)} />
+      <Header
+        withButton
+        buttonOnClick={() => setDrawerOpen(!drawerOpen)}
+        handleIcon={drawerOpen}
+      />
       <SideBarBackoffice open={drawerOpen} />
       <Grid container mt={12} paddingX={4}>
         {loading ? (
