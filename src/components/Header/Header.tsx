@@ -1,13 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import MenuIcon from '@mui/icons-material/Menu';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Badge, Grid, Stack } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import React, { useMemo, useState } from 'react';
-import useResponsiveScreen from '../../hooks/useResponsiveScreen';
+import { ReactElement, useMemo, useState } from 'react';
 import { useShoppingCart } from '../../features/ShoppingCart/context/ShoppingCartProvider';
 import ShoppingCart from '../../features/ShoppingCart/ShoppingCart';
 
-function Header() {
+interface Props {
+  withButton?: boolean;
+  buttonOnClick?: () => void;
+}
+function Header({ withButton = false, buttonOnClick }: Props): ReactElement {
   const [drawer, setDrawer] = useState(false);
   const {
     state: { items },
@@ -32,7 +36,20 @@ function Header() {
       paddingX={4}
       data-testid="header"
     >
-      <div />
+      {withButton ? (
+        <Grid>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={buttonOnClick}
+            edge="start"
+          >
+            <MenuIcon color="primary" sx={{ width: 30, height: 30 }} />
+          </IconButton>
+        </Grid>
+      ) : (
+        <div />
+      )}
       <Grid>
         <h2
           style={{
@@ -73,7 +90,7 @@ const styles = {
     height: 80,
     backgroundColor: 'black',
     position: 'fixed',
-    zIndex: 1000,
+    zIndex: 10,
   },
   img: {
     maxHeigth: 70,

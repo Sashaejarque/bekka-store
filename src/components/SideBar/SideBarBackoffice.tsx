@@ -1,4 +1,7 @@
-import React from 'react';
+import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
+import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import {
   Box,
   CssBaseline,
@@ -11,12 +14,10 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
-import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
 import Router, { useRouter } from 'next/router';
+import { ReactElement } from 'react';
 import { useAuth } from '../../features/Login/context/AuthProvider';
+import useResponsiveScreen from '../../hooks/useResponsiveScreen';
 
 interface ObjectType {
   Dashboard: string;
@@ -24,12 +25,17 @@ interface ObjectType {
   'Add producto': string;
 }
 
-function SideBarBackoffice() {
+interface Props {
+  open: boolean;
+}
+
+function SideBarBackoffice({ open }: Props): ReactElement {
   const {
     actions: { signOut },
   } = useAuth();
   const router = useRouter();
   const { pathname } = router;
+  const { width } = useResponsiveScreen();
 
   const handleLogout = () => {
     signOut();
@@ -49,20 +55,17 @@ function SideBarBackoffice() {
   };
 
   return (
-    <Drawer variant="permanent" anchor="left">
-      <Box sx={styles.drawerContainer}>
+    <Drawer variant="persistent" anchor="left" open={open} sx={{ zIndex: 1 }}>
+      <Box
+        sx={[
+          styles.drawerContainer,
+          {
+            width: width > 700 ? 240 : width,
+          },
+        ]}
+      >
         <CssBaseline />
         <Grid container>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            item
-            xs={12}
-            sx={{ background: 'black' }}
-          >
-            <h2 style={styles.bekkaTittle}>BEKKA</h2>
-          </Grid>
           <Grid item xs={12} container justifyContent="center" mt={1}>
             <Box sx={styles.cardContainer}>
               <Typography>Foto</Typography>
@@ -108,7 +111,7 @@ function SideBarBackoffice() {
 
 const styles = {
   drawerContainer: {
-    width: 240,
+    paddingTop: '80px',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',

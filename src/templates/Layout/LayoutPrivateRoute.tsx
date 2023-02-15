@@ -1,28 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  CssBaseline,
-  Drawer,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { Box, Button, CircularProgress, Grid } from '@mui/material';
 import Router from 'next/router';
+import { FC, PropsWithChildren, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
-import { useAuth } from '../../features/Login/context/AuthProvider';
 import SideBarBackoffice from '../../components/SideBar/SideBarBackoffice';
+import { useAuth } from '../../features/Login/context/AuthProvider';
 import useResponsiveScreen from '../../hooks/useResponsiveScreen';
 
 const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [logged, setLogged] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const {
     state: { isLogged },
   } = useAuth();
@@ -38,14 +26,22 @@ const LayoutPrivateRoute: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Box sx={styles.container}>
-      <SideBarBackoffice />
+      <Header withButton buttonOnClick={() => setDrawerOpen(!drawerOpen)} />
+      <SideBarBackoffice open={drawerOpen} />
       <Grid container mt={12} paddingX={4}>
         {loading ? (
           <Grid container item xs={12} justifyContent="center">
             <CircularProgress />
           </Grid>
         ) : logged ? (
-          <div style={{ width: width - 240, marginLeft: 240 }}>{children}</div>
+          <div
+            style={{
+              width: drawerOpen ? width - 240 : width,
+              marginLeft: drawerOpen ? 240 : 0,
+            }}
+          >
+            {children}
+          </div>
         ) : (
           <Grid
             container
