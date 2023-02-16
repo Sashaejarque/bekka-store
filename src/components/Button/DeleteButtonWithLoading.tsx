@@ -1,12 +1,14 @@
 import { CircularProgress, IconButton } from '@mui/material';
-import React, { FC, useState } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 interface IButtonWithLoading {
   onClick: () => void;
 }
 
-const DeleteButtonWithLoading: FC<IButtonWithLoading> = ({ onClick }) => {
+const DeleteButtonWithLoading = ({
+  onClick,
+}: IButtonWithLoading): ReactElement => {
   const [loading, setLoading] = useState(false);
   return (
     <IconButton

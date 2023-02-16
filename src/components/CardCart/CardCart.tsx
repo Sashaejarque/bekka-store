@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Box, Card, Grid, IconButton, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import Counter from '../Counter/Counter';
 import { useShoppingCart } from '../../features/ShoppingCart/context/ShoppingCartProvider';
 import { ShoppingCartItem } from '../../features/ShoppingCart/reducer/shoppingCartReducer';
@@ -10,7 +10,7 @@ interface Props {
   item: ShoppingCartItem;
 }
 
-const CardCart: FC<Props> = ({ item }) => {
+const CardCart = ({ item }: Props): ReactElement => {
   const {
     actions: {
       increaseOneProductToCart,

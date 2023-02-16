@@ -1,5 +1,5 @@
 import { Button, CircularProgress } from '@mui/material';
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 interface IButtonWithLoading {
   loading: boolean;
@@ -7,11 +7,11 @@ interface IButtonWithLoading {
   title: string;
 }
 
-const ButtonWithLoading: FC<IButtonWithLoading> = ({
+const ButtonWithLoading = ({
   loading,
   onClick,
   title,
-}) => (
+}: IButtonWithLoading): ReactElement => (
   <Button
     variant="contained"
     sx={{

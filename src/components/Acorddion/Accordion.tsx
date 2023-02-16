@@ -5,13 +5,13 @@ import {
   AccordionSummary,
   Typography,
 } from '@mui/material';
-import React, { FC, useState } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 
 interface Props {
   children: React.ReactNode;
   title: string;
 }
-const AccordionComponent: FC<Props> = ({ children, title }) => {
+const AccordionComponent = ({ children, title }: Props): ReactElement => {
   const [expanded, setExpanded] = useState<string | false>('panel1');
 
   const handleChange =

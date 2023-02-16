@@ -1,7 +1,7 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 
 interface Props {
   count: number;
@@ -9,7 +9,7 @@ interface Props {
   onClickAdd: () => void;
 }
 
-const Counter: FC<Props> = ({ count, onClickRemove, onClickAdd }) => (
+const Counter = ({ count, onClickRemove, onClickAdd }: Props): ReactElement => (
   <Box sx={styles.container}>
     <IconButton
       onClick={onClickRemove}
