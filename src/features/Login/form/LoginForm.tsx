@@ -26,12 +26,10 @@ const schema = yup.object().shape({
 
 interface LoginFormProps {
   loading: boolean;
+  onSubmit: (data: any) => void;
 }
-const LoginForm = ({ loading }: LoginFormProps): ReactElement => {
+const LoginForm = ({ loading, onSubmit }: LoginFormProps): ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
-  const {
-    actions: { signIn },
-  } = useAuth();
   const {
     register,
     handleSubmit,
@@ -40,16 +38,9 @@ const LoginForm = ({ loading }: LoginFormProps): ReactElement => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = (data: any) => {
-    try {
-      signIn(data.email, data.password);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <form
-      onSubmit={handleSubmit(onSubmitHandler)}
+      onSubmit={handleSubmit(onSubmit)}
       style={{
         width: '100%',
         display: 'flex',

@@ -1,18 +1,16 @@
 import { Grid, TextField, Typography } from '@mui/material';
-import React, { FC } from 'react';
+import React, { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ButtonWithLoading from '../../../components/Button/ButtonWithLoading';
-import { prepareToJson } from '../utils/prepareToJson';
-import { useProducts } from '../context/ProductProvider';
 
 const schema = yup.object().shape({
   name: yup.string().required('El nombre es requerido'),
   price: yup.number().required(),
   stock: yup.number().required(),
   image: yup.mixed().test('file', 'You need to provide a file', (value) => {
-    // @ts-ignore
+     // @ts-ignore
     if (value && value.length > 0) {
       return true;
     }
@@ -21,19 +19,10 @@ const schema = yup.object().shape({
 });
 interface Props {
   loading: boolean;
+  onSubmit: (data: any) => void;
 }
 
-interface formData {
-  name: string;
-  price: string;
-  stock: string;
-  image: File | null;
-}
-
-const AddProductForm: FC<Props> = ({ loading }) => {
-  const {
-    actions: { createProduct },
-  } = useProducts();
+const AddProductForm = ({ loading, onSubmit }: Props): ReactElement => {
   const {
     register,
     handleSubmit,
@@ -42,23 +31,9 @@ const AddProductForm: FC<Props> = ({ loading }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmitHandler = (data: any) => {
-    const formData = prepareToJson(data);
-    try {
-      createProduct(
-        formData.name,
-        formData.price,
-        formData.stock,
-        formData.image
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <form
-      onSubmit={handleSubmit(onSubmitHandler)}
+      onSubmit={handleSubmit(onSubmit)}
       style={{
         width: '100%',
         display: 'flex',

@@ -65,10 +65,11 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
     [toast]
   );
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     sessionStorage.removeItem('user-token');
     dispatch({ type: 'SIGN_OUT' });
-  };
+    toast.success(`Hasta pronto!`);
+  }, [toast]);
 
   const values = useMemo(
     () => ({
@@ -82,7 +83,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         signOut: handleLogout,
       },
     }),
-    [signIn, state]
+    [signIn, state, handleLogout]
   );
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
