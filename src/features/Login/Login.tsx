@@ -15,8 +15,7 @@ function LoginUI() {
   const handleLoginFormSubmit = (data: LoginFormsValues) => {
     try {
       signIn(data.email, data.password);
-    }
-    catch(error) {
+    } catch (error) {
       console.log(error);
     }
   };

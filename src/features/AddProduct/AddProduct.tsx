@@ -39,7 +39,10 @@ function AddProduct() {
         justifyContent: 'center',
       }}
     >
-      <AddProductForm loading={loading} onSubmit={handleCreateProductFormSubmit} />
+      <AddProductForm
+        loading={loading}
+        onSubmit={handleCreateProductFormSubmit}
+      />
     </Box>
   );
 }

@@ -5,7 +5,7 @@ import {
   AccordionSummary,
   Typography,
 } from '@mui/material';
-import React, { FC, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 interface Props {
   children: React.ReactNode;

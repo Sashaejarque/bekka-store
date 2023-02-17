@@ -14,13 +14,13 @@ import { ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import ButtonWithLoading from '../../../components/Button/ButtonWithLoading';
-import { useAuth } from '../context/AuthProvider';
+import { ErrorMessage } from '@hookform/error-message';
 
 const schema = yup.object().shape({
   email: yup.string().email().required('El email es requerido'),
   password: yup
     .string()
-    .required()
+    .required('La contraseña es requerida')
     .min(6, 'La contraseña debe tener al menos 6 caracteres'),
 });
 
@@ -28,6 +28,7 @@ interface LoginFormProps {
   loading: boolean;
   onSubmit: (data: any) => void;
 }
+
 const LoginForm = ({ loading, onSubmit }: LoginFormProps): ReactElement => {
   const [showPassword, setShowPassword] = useState(false);
   const {
@@ -64,9 +65,15 @@ const LoginForm = ({ loading, onSubmit }: LoginFormProps): ReactElement => {
             {...register('email')}
             error={!!errors.email}
           />
-          <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 4 }}>
-            {errors.email?.message && 'El email es requerido'}
-          </Typography>
+          <ErrorMessage
+            errors={errors}
+            name="email"
+            render={({ message }) => (
+              <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 3 }}>
+                {message}
+              </Typography>
+            )}
+          />
         </Grid>
         <Grid container item xs={12}>
           <FormControl
@@ -95,9 +102,15 @@ const LoginForm = ({ loading, onSubmit }: LoginFormProps): ReactElement => {
               error={!!errors.password}
             />
           </FormControl>
-          <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 4 }}>
-            {errors.password?.message && 'El password es requerido'}
-          </Typography>
+          <ErrorMessage
+            errors={errors}
+            name="password"
+            render={({ message }) => (
+              <Typography sx={{ color: 'red', fontSize: 10, marginLeft: 3 }}>
+                {message}
+              </Typography>
+            )}
+          />
         </Grid>
         <Grid
           container
