@@ -26,7 +26,7 @@ function ProductsList() {
     <>
       <Grid container item xs={12}>
         <Typography sx={{ fontWeight: 600, fontSize: 40 }}>
-          Our products
+          Nuestros productos
         </Typography>
       </Grid>
       <Grid container item xs={12} justifyContent="center" alignItems="center">
@@ -62,7 +62,7 @@ function ProductsList() {
               textAlign="center"
               sx={{ marginBottom: 10, fontSize: 20 }}
             >
-              No products found, try with another name...
+              No se encontraron productos, pruebe con otro nombre...
             </Typography>
           </Grid>
         )}

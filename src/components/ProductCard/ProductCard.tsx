@@ -96,7 +96,9 @@ const ProductCard: FC<Props> = ({ item }) => {
             onClick={() => handleAddProductToCart()}
             data-testid="addButtonProduct"
           >
-            <Typography sx={{ color: 'white' }}>Add to cart</Typography>
+            <Typography sx={{ color: 'white', fontSize: 12 }}>
+              Agregar al carrito
+            </Typography>
           </Button>
         </Grid>
       </CardActions>

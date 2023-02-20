@@ -10,18 +10,20 @@ import {
   TextField,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 interface SearchAndFilterProps {
   onChangeSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const SearchAndFilter: FC<SearchAndFilterProps> = ({ onChangeSearchInput }) => (
+const SearchAndFilter = ({
+  onChangeSearchInput,
+}: SearchAndFilterProps): ReactElement => (
   <Grid container spacing={1}>
     <Grid item xs={12}>
       <TextField
         id="input-with-icon-textfield"
         sx={{ width: '100%', marginTop: 4 }}
-        label="Search for products"
+        label="Buscar producto"
         onChange={onChangeSearchInput}
         InputProps={{
           startAdornment: (

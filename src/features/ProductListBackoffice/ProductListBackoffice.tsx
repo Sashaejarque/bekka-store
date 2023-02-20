@@ -24,8 +24,8 @@ function ProductListBackoffice() {
   }, [getAllProducts]);
 
   return (
-    <Grid container justifyContent="center" alignItems="center">
-      <h1>List de productos</h1>
+    <Grid container justifyContent="center" alignItems="center" pl={4}>
+      <h1>Lista de productos</h1>
       {loading ? (
         <Grid container alignItems="center" justifyContent="center" mt={8}>
           <CircularProgress />
