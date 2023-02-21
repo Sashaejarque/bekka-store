@@ -51,9 +51,9 @@ function Header({
             edge="start"
           >
             {handleIcon ? (
-              <ArrowBackIosIcon color="primary" />
+              <ArrowBackIosIcon sx={{ color: 'white' }} />
             ) : (
-              <MenuIcon color="primary" />
+              <MenuIcon sx={{ color: 'white' }} />
             )}
           </IconButton>
         </Grid>
@@ -81,7 +81,7 @@ function Header({
             onClick={() => toggleDrawer()}
             data-testid="shopping-cart-button"
           >
-            <ShoppingCartIcon color="primary" />
+            <ShoppingCartIcon sx={{ color: 'white' }} />
           </IconButton>
         </Badge>
       </Grid>

@@ -7,7 +7,6 @@ interface Product {
 
 export const prepareToJson = (data: Product) => {
   const image = data.image[0];
-  
 
   return {
     ...data,

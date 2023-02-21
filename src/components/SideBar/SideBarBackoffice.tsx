@@ -12,6 +12,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Stack,
   Typography,
 } from '@mui/material';
 import Router, { useRouter } from 'next/router';
@@ -22,7 +23,7 @@ import useResponsiveScreen from '../../hooks/useResponsiveScreen';
 interface ObjectType {
   Dashboard: string;
   Productos: string;
-  'Add producto': string;
+  'Agregar producto': string;
 }
 
 interface Props {
@@ -45,50 +46,68 @@ function SideBarBackoffice({ open }: Props): ReactElement {
   const path = {
     Dashboard: '/admin/dashboard',
     Productos: '/admin/products/list',
-    'Add producto': '/admin/products/add',
+    'Agregar producto': '/admin/products/add',
   };
 
   const icons = {
     Dashboard: <AutoGraphOutlinedIcon />,
     Productos: <ShoppingCartOutlinedIcon />,
-    'Add producto': <AddShoppingCartOutlinedIcon />,
+    'Agregar producto': <AddShoppingCartOutlinedIcon />,
   };
 
   return (
-    <Drawer variant="persistent" anchor="left" open={open} sx={{ zIndex: 1 }}>
+    <Drawer variant="persistent" anchor="left" open={open} sx={{ zIndex: 2 }}>
       <Box
         sx={[
           styles.drawerContainer,
           {
-            width: width > 700 ? 240 : width,
+            width: width > 700 ? 280 : width,
           },
         ]}
       >
         <CssBaseline />
         <Grid container>
-          <Grid item xs={12} container justifyContent="center" mt={1}>
-            <Box sx={styles.cardContainer}>
-              <Typography>Foto</Typography>
-              <Typography fontWeight="bold">Sasha Ejarque</Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <List>
-              {['Dashboard', 'Productos', 'Add producto'].map((text, index) => (
-                <ListItem
-                  key={text}
-                  onClick={() => Router.push(path[text as keyof ObjectType])}
-                >
-                  <ListItemButton
-                    selected={pathname.includes(path[text as keyof ObjectType])}
+          {/*  <Grid item xs={12} container justifyContent="center" mt={1}>
+              <Box sx={styles.cardContainer}>
+                <Typography>Foto</Typography>
+                <Typography fontWeight="bold">Sasha Ejarque</Typography>
+              </Box>
+            </Grid> */}
+          <Grid
+            container
+            item
+            xs={12}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <List sx={{ width: '100%' }}>
+              {['Dashboard', 'Productos', 'Agregar producto'].map(
+                (text, index) => (
+                  <ListItem
+                    key={text}
+                    onClick={() => Router.push(path[text as keyof ObjectType])}
                   >
-                    <ListItemIcon>
-                      {icons[text as keyof ObjectType]}
-                    </ListItemIcon>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              ))}
+                    <Stack sx={{ width: '100%' }}>
+                      <ListItemButton
+                        selected={pathname.includes(
+                          path[text as keyof ObjectType]
+                        )}
+                        sx={{
+                          width: '100%',
+                          display: 'flex',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <ListItemIcon>
+                          {icons[text as keyof ObjectType]}
+                        </ListItemIcon>
+                        <ListItemText primary={text} />
+                      </ListItemButton>
+                    </Stack>
+                  </ListItem>
+                )
+              )}
             </List>
           </Grid>
         </Grid>

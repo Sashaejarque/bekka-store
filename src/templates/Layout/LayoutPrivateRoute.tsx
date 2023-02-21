@@ -1,6 +1,6 @@
 import { Box, Button, CircularProgress, Grid } from '@mui/material';
 import Router from 'next/router';
-import { PropsWithChildren, ReactElement, useState } from 'react';
+import { PropsWithChildren, ReactElement, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import SideBarBackoffice from '../../components/SideBar/SideBarBackoffice';
 import { useLoginStatus } from '../../hooks/useLoginStatus';
@@ -10,6 +10,12 @@ const LayoutPrivateRoute = ({ children }: PropsWithChildren): ReactElement => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [logged, loading] = useLoginStatus();
   const { width } = useResponsiveScreen();
+
+  useEffect(() => {
+    if (width > 700) {
+      setDrawerOpen(true);
+    }
+  }, [width]);
 
   return (
     <Box sx={styles.container}>
