@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getToken } from '../../Login/utils/loginHelper';
 
 interface Product {
   name: string;
@@ -10,7 +11,7 @@ interface Product {
 export const createProductService = async (product: Product) => {
   const config = {
     headers: {
-      'tkn-authorize': sessionStorage.getItem('user-token'),
+      'tkn-authorize': getToken(),
     },
   };
   try {

@@ -11,6 +11,7 @@ import {
 import { useToast } from 'use-toast-mui';
 import { login } from '../../../services/auth';
 import { authReducer } from '../reducer/authReducer';
+import { setToken, removeToken } from '../utils/loginHelper';
 import { AuthContext } from './CreateAuthContext';
 
 export interface IHttpResponse extends AxiosResponse {
@@ -46,7 +47,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         if (response) {
           const { data } = response;
           const { jwt } = data;
-          sessionStorage.setItem('user-token', jwt);
+          setToken(jwt);
           dispatch({ type: 'SIGN_IN', payload: jwt });
 
           if (response.status === 200) {
@@ -66,7 +67,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   );
 
   const handleLogout = useCallback(() => {
-    sessionStorage.removeItem('user-token');
+    removeToken();
     dispatch({ type: 'SIGN_OUT' });
     toast.success(`Hasta pronto!`);
   }, [toast]);

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../features/Login/context/AuthProvider';
+import { getToken } from '../features/Login/utils/loginHelper';
 
 export function useLoginStatus() {
   const {
@@ -9,7 +10,7 @@ export function useLoginStatus() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = sessionStorage.getItem('user-token');
+    const token = getToken();
     if (token || isLogged) {
       setLogged(true);
     }
