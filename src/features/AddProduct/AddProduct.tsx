@@ -2,14 +2,10 @@ import { Box } from '@mui/material';
 import React from 'react';
 import { useProducts } from './context/ProductProvider';
 import AddProductForm from './form/AddProductForm';
+import { CreateProductFormValues } from './types/CreateProductFormValues';
 import { prepareToJson } from './utils/prepareToJson';
 
-interface CreateProductFormValues {
-  name: string;
-  price: number;
-  stock: number;
-  image: FileList;
-}
+
 function AddProduct() {
   const {
     state: { loading },

@@ -6,15 +6,6 @@ import { useAuth } from '../Login/context/AuthProvider';
 import LayoutPrivateRoute from '../../templates/Layout/LayoutPrivateRoute';
 
 function BackOfficeHome() {
-  const [open, setOpen] = React.useState(true);
-  const {
-    actions: { signOut },
-  } = useAuth();
-
-  const handleLogout = () => {
-    signOut();
-    Router.push('/');
-  };
   return (
     <LayoutPrivateRoute>
       <Grid

@@ -12,6 +12,7 @@ import {
 import React, { useEffect } from 'react';
 import { useProductListBackofficeContext } from './context/ProductListBackofficeProvider';
 import IconButtonWithLoading from '../../components/Button/DeleteButtonWithLoading';
+import Title from '../../components/form/TitleForm';
 
 function ProductListBackoffice() {
   const {
@@ -25,7 +26,7 @@ function ProductListBackoffice() {
 
   return (
     <Grid container justifyContent="center" alignItems="center" pl={4}>
-      <h1>Lista de productos</h1>
+      <Title title="Lista de productos" />
       {loading ? (
         <Grid container alignItems="center" justifyContent="center" mt={8}>
           <CircularProgress />

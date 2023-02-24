@@ -1,11 +1,7 @@
-interface Product {
-  name: string;
-  price: number;
-  stock: number;
-  image: FileList;
-}
+import { CreateProductFormValues } from './../types/CreateProductFormValues';
 
-export const prepareToJson = (data: Product) => {
+
+export const prepareToJson = (data: CreateProductFormValues) => {
   const image = data.image[0];
 
   return {
