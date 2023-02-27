@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from '../../Login/utils/loginHelper';
+import { CookieHandler } from '../../Login/utils/CookieHandler';
 
 interface Product {
   name: string;
@@ -9,9 +9,10 @@ interface Product {
 }
 
 export const createProductService = async (product: Product) => {
+  const cookieToken = new CookieHandler();
   const config = {
     headers: {
-      'tkn-authorize': getToken(),
+      'tkn-authorize': cookieToken.getToken(),
     },
   };
   try {

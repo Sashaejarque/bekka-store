@@ -11,7 +11,7 @@ import {
 import { useToast } from 'use-toast-mui';
 import { login } from '../../../services/auth';
 import { authReducer } from '../reducer/authReducer';
-import { setToken, removeToken } from '../utils/loginHelper';
+import { CookieHandler } from '../utils/CookieHandler';
 import { AuthContext } from './CreateAuthContext';
 
 export interface IHttpResponse extends AxiosResponse {
@@ -34,6 +34,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   });
 
   const toast = useToast();
+  const cookie = useMemo(() => new CookieHandler(), []);
 
   const signIn = useCallback(
     async (email: string, password: string) => {
@@ -47,7 +48,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         if (response) {
           const { data } = response;
           const { jwt } = data;
-          setToken(jwt);
+          cookie.setToken(jwt);
           dispatch({ type: 'SIGN_IN', payload: jwt });
 
           if (response.status === 200) {
@@ -63,14 +64,14 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
         console.error(error);
       }
     },
-    [toast]
+    [toast, cookie]
   );
 
   const handleLogout = useCallback(() => {
-    removeToken();
+    cookie.removeToken();
     dispatch({ type: 'SIGN_OUT' });
     toast.success(`Hasta pronto!`);
-  }, [toast]);
+  }, [toast, cookie]);
 
   const values = useMemo(
     () => ({

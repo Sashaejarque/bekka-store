@@ -1,6 +1,5 @@
 import { CreateProductFormValues } from './../types/CreateProductFormValues';
 
-
 export const prepareToJson = (data: CreateProductFormValues) => {
   const image = data.image[0];
 

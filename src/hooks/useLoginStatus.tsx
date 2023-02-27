@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useAuth } from '../features/Login/context/AuthProvider';
-import { getToken } from '../features/Login/utils/loginHelper';
+import { CookieHandler } from '../features/Login/utils/CookieHandler';
 
 export function useLoginStatus() {
   const {
@@ -8,14 +8,15 @@ export function useLoginStatus() {
   } = useAuth();
   const [logged, setLogged] = useState(false);
   const [loading, setLoading] = useState(true);
+  const cookie = useMemo(() => new CookieHandler(), []);
 
   useEffect(() => {
-    const token = getToken();
+    const token = cookie.getToken();
     if (token || isLogged) {
       setLogged(true);
     }
     setLoading(false);
-  }, [logged, isLogged]);
+  }, [logged, isLogged, cookie]);
 
   return [logged, loading];
 }

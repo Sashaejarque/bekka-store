@@ -5,7 +5,6 @@ import AddProductForm from './form/AddProductForm';
 import { CreateProductFormValues } from './types/CreateProductFormValues';
 import { prepareToJson } from './utils/prepareToJson';
 
-
 function AddProduct() {
   const {
     state: { loading },
