@@ -5,24 +5,27 @@ import Header from '../../components/Header/Header';
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   const [isWrapped, setIsWrapped] = React.useState(false);
   useEffect(() => {
-    if(window.parent === null) {
-      setIsWrapped(false);
-    } else {
+    const isInWebAppChrome = window.matchMedia(
+      '(display-mode: standalone)'
+    ).matches;
+    if (isInWebAppChrome) {
       setIsWrapped(true);
     }
-  }, [])
+  }, []);
   return (
     <Box sx={styles.container}>
       <Header />
       {isWrapped ? (
+        <Grid container mt={12} paddingX={4}>
         <h1>esta wrappeado</h1>
+      </Grid>
       ) : (
         <Grid container mt={12} paddingX={4}>
-        {children}
-      </Grid>
+          {children}
+        </Grid>
       )}
     </Box>
-  )
+  );
 };
 
 const styles = {
