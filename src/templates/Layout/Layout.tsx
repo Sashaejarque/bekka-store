@@ -5,7 +5,9 @@ import Header from '../../components/Header/Header';
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   const [isWrapped, setIsWrapped] = React.useState(false);
   useEffect(() => {
-    if(window.parent !== window) {
+    if(window.parent === null) {
+      setIsWrapped(false);
+    } else {
       setIsWrapped(true);
     }
   }, [])
